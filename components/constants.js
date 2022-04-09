@@ -13,28 +13,28 @@ const COLORS = {
 const MostGainedCoins = [
     {
       id: 1,
-      coinName: 'Bitcoin',
-      percentage: 21
+      name: 'Bitcoin',
+      market_cap_change_24h: 21
     },
     {
       id: 2,
-      coinName: 'Ethereum',
-      percentage: 12
+      name: 'Ethereum',
+      market_cap_change_24h: 12
     },
     {
       id: 3,
-      coinName: 'Decentraland',
-      percentage: 6
+      name: 'Decentraland',
+      market_cap_change_24h: 6
     },
     {
       id: 4,
-      coinName: 'Gala',
-      percentage: 28
+      name: 'Gala',
+      market_cap_change_24h: 28
     },
     {
       id: 5,
-      coinName: 'Theta',
-      percentage: 34
+      name: 'Theta',
+      market_cap_change_24h: 34
     },
   ]
 export {COLORS,MostGainedCoins};

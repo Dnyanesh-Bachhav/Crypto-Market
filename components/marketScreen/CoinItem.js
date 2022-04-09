@@ -21,7 +21,7 @@ function CoinItem({coinName,symbol,current_price,uri,price_change_percentage_24h
             </View>
             <Text style={styles.coinPrice}>₹{current_price}</Text>
             <View style={{backgroundColor: price_change_percentage_24h > 0 ? COLORS.lightGreen : COLORS.lightRed, ...styles.coinPercentage}}>
-                <Text style={{color: per_color}}>{price_change_percentage_24h.toFixed(2)}%</Text>
+                <Text style={{color: per_color,fontWeight: 'bold' }}>{price_change_percentage_24h.toFixed(2)}%</Text>
                 <AntDesign name={price_change_percentage_24h > 0 ? "caretup" : "caretdown"} size={16} color={per_color} />
             </View>
         </View>
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 8,
         borderRadius: 5,
+        fontWeight: 'bold',
         marginLeft: 'auto'
     }
 });

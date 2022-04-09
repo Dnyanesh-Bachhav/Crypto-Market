@@ -6,6 +6,7 @@ import MarketScreen from "../screens/MarketScreen";
 import PortfolioScreen from "../screens/Portfolio";
 import BasketsScreen from "../screens/BasketsScreen";
 import { COLORS } from "../components/constants";
+import HomeStack from "../Stacks/HomeStack";
 
 const Tab = createBottomTabNavigator();
 function Tabs(){
@@ -23,7 +24,7 @@ function Tabs(){
 
         
         >
-            <Tab.Screen name="Home" component={HomeScreen} options={{
+            <Tab.Screen name="HomeScreen" component={HomeStack} options={{
                 headerShown: false,
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>

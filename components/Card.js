@@ -1,11 +1,20 @@
 import React from 'react';
-import {View,Text,Image,StyleSheet,ScrollView,Dimensions} from 'react-native';
+import {View,Text,Image,StyleSheet,ScrollView,Dimensions,TouchableOpacity} from 'react-native';
 import { COLORS } from './constants';
 const CARD_HEIGHT = Dimensions.get('window').height/5;
 const CARD_WIDTH = Dimensions.get('window').width/3;
+import {useNavigation} from '@react-navigation/native';
 function Card({coinName,percentage}){
+  const navigation = useNavigation();
   return(
     <View style={styles.container}>
+      <TouchableOpacity onPress={()=>{
+        console.log("CoinName: "+coinName);
+        navigation.navigate("coinDetails",{
+          coin: coinName
+        });
+      }} >
+        
       <View style={styles.card}>
         <Image
         style={styles.imgStyle}
@@ -14,10 +23,11 @@ function Card({coinName,percentage}){
         <Text style={styles.coinNameText}>{coinName}</Text>
         <Text>₹21.12</Text>
         { percentage > 0 ?
-        <Text style={styles.coinPercentage}>{percentage ? percentage: 20}%</Text>
-        : <Text style={styles.coinPercentageRed}>{percentage ? percentage: 20}%</Text>
+        <Text style={styles.coinPercentage}>{percentage.toFixed(2)}%</Text>
+        : <Text style={styles.coinPercentageRed}>{percentage.toFixed(2)}%</Text>
         }
       </View>
+      </TouchableOpacity>
     </View>
   );
 }

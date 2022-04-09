@@ -5,10 +5,22 @@ import SearchBar from "../components/marketScreen/SearchBar";
 import TableHeader from "../components/marketScreen/TableHeader";
 import { getCoins } from "../Services/requests";
 function MarketScreen(){
-    const [coinsData,setCoinsData] = useState(null);
-    const [loading,setLoading] = useState(true);
+    const [coinsData,setCoinsData] = useState([]);
+    const [loading,setLoading] = useState(false);
+    let count = 0;
     const fetchData = async(pageNumber)=>{
+        if(loading)
+        {
+            return <ActivityIndicator/>
+        }
+        setLoading(true);
         const data = await getCoins(pageNumber);
+        setCoinsData((existingData)=> ([...existingData,...data]));
+        setLoading(false);
+    }
+    const refetchData = async()=>{
+        setLoading(true);
+        const data = await getCoins();
         setCoinsData(data);
         setLoading(false);
     }
@@ -28,7 +40,8 @@ function MarketScreen(){
                     <CoinItem coinName={item.name} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h} />
                 )}
                 onEndReached={()=>fetchData((coinsData.length/50)+1)}
-                refreshControl={<RefreshControl refreshing={loading} />}
+                refreshControl={<RefreshControl refreshing={loading} onRefresh={refetchData} />}
+                keyExtractor={()=>count++}
                 />)
                 : <ActivityIndicator/>
             }

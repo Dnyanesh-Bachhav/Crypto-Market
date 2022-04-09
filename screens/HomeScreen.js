@@ -1,9 +1,11 @@
-import React from "react";
-import {View,Text,StyleSheet,ScrollView} from 'react-native';
+import React,{useEffect,useState} from "react";
+import {View,Text,StyleSheet,ScrollView,TouchableOpacity} from 'react-native';
 import Banner from "../components/Banner";
 import Header from '../components/Header';
 import MainLists from "../components/MainLists";
+import {useNavigation} from '@react-navigation/native';
 function HomeScreen(){
+    const navigation = useNavigation();
     return(
         <View style={styles.container}>
             <Header/>
