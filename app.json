@@ -4,7 +4,7 @@
     "slug": "coinStack",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,8 +20,10 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
+      "package": "com.dnyaneshbachhav.coinStack",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },

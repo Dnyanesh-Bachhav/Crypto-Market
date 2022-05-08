@@ -3,7 +3,7 @@ import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native';
 import { COLORS } from "../constants";
 import { AntDesign } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native';
-function Header({coinName,imgUrl }){
+function Header({coinName,imgSrc }){
     const navigation = useNavigation();
     return(
         <View style={styles.container}>
@@ -15,7 +15,7 @@ function Header({coinName,imgUrl }){
             <View style={styles.coinContainer}>
                 <Image
                     source={{
-                        uri: imgUrl
+                        uri: imgSrc
                     }}
                     style={styles.imageStyle}
                 />

@@ -1,11 +1,11 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { COLORS } from "./constants";
+import { COLORS } from "../constants";
 
-function Button({button_text})
+function Button({button_text,backColor})
 {
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.buttonStyle} onPress={
+            <TouchableOpacity style={{...styles.buttonStyle,backgroundColor: backColor, shadowColor: backColor}} onPress={
                   ()=>{
                     console.log("Hello there...");
                   }
@@ -18,22 +18,19 @@ function Button({button_text})
 const styles = StyleSheet.create({
     container: {
         
-        shadowColor: COLORS.primary,
         borderColor: "#000",
         alignItems: 'center'
     },
     buttonStyle:{
         padding: 10,
-        paddingHorizontal: 15,
-        elevation: 25,
-        backgroundColor: COLORS.primary,
-        borderRadius: 8,
-        width: '60%',
+        elevation: 10,
+        borderRadius: 10,
     },
     buttonText:{
         color: COLORS.white,
         fontWeight: '600',
         fontSize: 22,
+        paddingHorizontal: 25,
         textAlign: 'center'
     }
 })

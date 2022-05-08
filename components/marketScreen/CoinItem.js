@@ -43,21 +43,27 @@ const styles = StyleSheet.create({
     },
     coinName:{
         paddingLeft: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     },
     coinPrice:{
         justifyContent: 'center',
-        marginLeft: 'auto',
+        // marginLeft: 'auto',
+        textAlign: 'right',
+        // borderWidth: 1,
+        marginRight: 10,
+        flex: 1
     },
 
     coinPercentage:{
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 8,
+        paddingVertical: 8,
         borderRadius: 5,
         fontWeight: 'bold',
-        marginLeft: 'auto'
+        // marginLeft: 'auto',
+        flex: 1
     }
 });
 export default CoinItem;

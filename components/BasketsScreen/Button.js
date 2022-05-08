@@ -1,15 +1,17 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS } from "../constants";
 
-function Button({button_text})
+function Button({button_text,navigation, screenName, imgSrc })
 {
+    
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.buttonStyle} onPress={
-                  ()=>{
-                    console.log("Hello there...");
-                  }
-                } >
+            <TouchableOpacity style={styles.buttonStyle} onPress={() => {
+            navigation.navigate("BasketItem", {
+              screenName: screenName,
+              imgSrc: imgSrc
+            });
+          }}>
             <Text style={styles.buttonText}>{button_text}</Text>
             </TouchableOpacity>
         </View>

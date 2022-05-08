@@ -7,6 +7,8 @@ import PortfolioScreen from "../screens/Portfolio";
 import BasketsScreen from "../screens/BasketsScreen";
 import { COLORS } from "../components/constants";
 import HomeStack from "../Stacks/HomeStack";
+import BasketsStack from "../Stacks/BasketStack";
+import MarketStack from "../Stacks/MarketStack";
 
 const Tab = createBottomTabNavigator();
 function Tabs(){
@@ -37,7 +39,7 @@ function Tabs(){
                     </View>
                 )
             }} />
-            <Tab.Screen name="Market" component={MarketScreen} options={{
+            <Tab.Screen name="Market" component={MarketStack} options={{
                 headerShown: false,
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
@@ -50,7 +52,7 @@ function Tabs(){
                     </View>
                 )
             }} />
-            <Tab.Screen name="Baskets" component={BasketsScreen} options={{
+            <Tab.Screen name="Baskets" component={BasketsStack} options={{
                 headerShown: false,
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
@@ -65,6 +67,7 @@ function Tabs(){
             }} />
             <Tab.Screen name="Portfolio" component={PortfolioScreen} options={{
                 headerShown: false,
+                unmountOnBlur: true,
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
                     {/* <TouchableOpacity> */}

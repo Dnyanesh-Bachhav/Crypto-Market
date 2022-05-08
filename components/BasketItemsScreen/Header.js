@@ -3,8 +3,9 @@ import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native';
 import { COLORS } from "../constants";
 import { AntDesign } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native';
-function Header({coinName,imgUrl }){
+function Header({ name,imgSrc }){
     const navigation = useNavigation();
+    
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={()=>{
@@ -14,12 +15,13 @@ function Header({coinName,imgUrl }){
             </TouchableOpacity>
             <View style={styles.coinContainer}>
                 <Image
-                    source={{
-                        uri: imgUrl
+                    source={imgSrc}
+                    style={{
+                        width: 24,
+                        height: 24
                     }}
-                    style={styles.imageStyle}
                 />
-                <Text style={styles.textStyle}>{coinName}</Text>
+                <Text style={styles.textStyle}>{ name }</Text>
             </View>
         </View>
     );
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontWeight: 'bold',
         padding: 5,
+        fontSize: 16
     },
     coinContainer:{
         width: '90%',

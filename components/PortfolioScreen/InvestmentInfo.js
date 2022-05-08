@@ -1,7 +1,7 @@
 import react from "react";
 import {View,Text,StyleSheet} from 'react-native';
 import { COLORS } from "../constants";
-function InvestmentInfo(){
+function InvestmentInfo({invested,current}){
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -9,8 +9,8 @@ function InvestmentInfo(){
                 <Text style={{marginRight: '5%', ...styles.textStyle}}>Invested</Text>
             </View>
             <View style={styles.headerVal}>
-                <Text style={{marginLeft: '5%', ...styles.headerTextStyle}}>₹10,000</Text>
-                <Text style={{marginRight: '5%', ...styles.headerTextStyle}}>₹5000</Text>
+                <Text style={{marginLeft: '5%', ...styles.headerTextStyle}}>₹{current}</Text>
+                <Text style={{marginRight: '5%', ...styles.headerTextStyle}}>₹{invested}</Text>
             </View>
 
             <View style={styles.header}>
@@ -18,8 +18,8 @@ function InvestmentInfo(){
                 <Text style={{marginRight: '5%', ...styles.textStyle}}>Total Returns%</Text>
             </View>
             <View style={styles.headerVal}>
-                <Text style={{marginLeft: '5%', ...styles.headerTextStyle}}>₹5,000</Text>
-                <Text style={{marginRight: '5%', ...styles.headerTextStyle}}>50%</Text>
+                <Text style={{marginLeft: '5%', ...styles.headerTextStyle}}>₹0</Text>
+                <Text style={{marginRight: '5%', ...styles.headerTextStyle}}>0%</Text>
             </View>
         </View>
     );

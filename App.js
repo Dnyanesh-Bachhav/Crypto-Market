@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './Navigation/tabs';
 import NetInfo from '@react-native-community/netinfo';
 import NoInternetScreen from './screens/NoInternetScreen';
+import PortfolioContextProvider from './Contexts/PortfolioContext';
+
 export default function App() {
   const [connected,setConnected] = useState(true);
   async function getNetworkData(){
@@ -19,9 +21,11 @@ export default function App() {
     {
       connected ?
       <>
+      <PortfolioContextProvider>
         <NavigationContainer>
             <Tabs/>
         </NavigationContainer>
+      </PortfolioContextProvider>
       </>
     : <NoInternetScreen/>
     

@@ -1,21 +1,38 @@
-import react from 'react';
-import {View,Text,StyleSheet,Image} from 'react-native';
+import react,{useContext} from 'react';
+import {View,Text,StyleSheet,Image,TouchableOpacity} from 'react-native';
 import { COLORS } from '../constants';
 import { Feather } from '@expo/vector-icons';
-function InvestCoinCard(){
+import { AntDesign } from '@expo/vector-icons';
+import { portfolioContext } from '../../Contexts/PortfolioContext';
+function InvestCoinCard({coinId,price,imgSrc,quantity}){
+    const {portfolioCoins,updatePortfolioCoins } = useContext(portfolioContext);
+    function removeCoin(){
+     const data = portfolioCoins.filter(coin=> coin.name !== coinId);
+     updatePortfolioCoins(data);
+    }
     return(
         <View style={styles.container}>
+
             <View style={styles.title}>
                 <Image
-                    source={require("../../assets/MANA_Logo.jpg")}
+                    source={{
+                        uri: imgSrc
+                    }}
                     style={styles.imgStyle}
                     />
-                <Text style={styles.coinName}>Bitcoin</Text>
-                <Feather name="arrow-right" size={24} color={COLORS.grayDark} style={styles.iconStyle}/>
+                <Text style={styles.coinName}>{coinId}</Text>
+                <TouchableOpacity style={styles.iconStyle} onPress={()=>{
+                    console.log("Hi there..."+coinId);
+                    removeCoin();
+                }} >
+
+                <AntDesign name="delete" size={22} color="black" />
+                </TouchableOpacity>
+                {/* <Feather name="arrow-right" size={24} color={COLORS.grayDark} style={styles.iconStyle}/> */}
             </View>
             <View style={styles.bottomSection}>
-                <Text style={{color: COLORS.grayDark}}>Returns</Text>
-                <Text style={{color: COLORS.success,fontWeight: 'bold'}} >₹1012</Text>
+                <Text style={{color: COLORS.success,fontWeight: 'bold'}}>{quantity}</Text>
+                <Text style={{color: COLORS.success,fontWeight: 'bold'}} >₹{price}</Text>
             </View>
         </View>
     );

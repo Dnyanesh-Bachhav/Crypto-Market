@@ -1,26 +1,31 @@
 import react from "react";
-import {View,Text,StyleSheet,Image} from 'react-native';
+import {View,Text,StyleSheet,Image,TouchableOpacity } from 'react-native';
 import { COLORS } from "../constants";
 import Button from './Button';
-function BasketsItem({name,description}){
-    return(
-        <View style={styles.container}>
-            <View style={styles.basket}>
-                <Image
-                    source={require("../../assets/trending.jpg")}
-                    style={styles.imgStyle}
-                />
-                <View>
-                    <Text style={styles.basketName}>{name}</Text>
-                    <Text>{description}</Text>
-                </View>
+import {useNavigation} from '@react-navigation/native';
+function Basket({name,description,imgSrc}){
+    const navigation = useNavigation();
+    return (
+      <View style={styles.container}>
+        
+          <View style={styles.basket}>
+            <Image
+              source={imgSrc}
+              style={styles.imgStyle}
+            />
+            <View>
+              <Text style={styles.basketName}>{name}</Text>
+              <Text>{description}</Text>
             </View>
-            <Text style={styles.description}>Hello there it is just a basket of High Traded Volume Crypto...</Text>
-            <View style={styles.btnContainer}>
-            <Button button_text={"Check out"}/>
-            </View>
-
-        </View>
+          </View>
+          <Text style={styles.description}>
+             Hello there it is just a basket of High Traded Volume Crypto...
+          </Text>
+          <View style={styles.btnContainer}>
+          
+            <Button button_text={"Check out"} navigation={navigation} screenName={name} imgSrc={imgSrc} />
+          </View>
+      </View>
     );
 }
 const styles = StyleSheet.create({
@@ -60,4 +65,4 @@ const styles = StyleSheet.create({
         paddingRight: 5,
     }
 });
-export default BasketsItem;
+export default Basket;

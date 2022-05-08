@@ -1,3 +1,8 @@
+import banner1 from '../assets/banner1.png';
+import banner2 from '../assets/banner2.png';
+import banner3 from '../assets/banner3.png';
+import banner4 from '../assets/banner4.png';
+import banner5 from '../assets/banner5.png';
 const COLORS = {
     primary: '#211DDD',
     secondary: '#EBEBFE',
@@ -14,27 +19,206 @@ const MostGainedCoins = [
     {
       id: 1,
       name: 'Bitcoin',
-      market_cap_change_24h: 21
+      market_cap_change_24h: 21,
+      price: 2763656,
+      imgSrc: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
     },
     {
       id: 2,
       name: 'Ethereum',
-      market_cap_change_24h: 12
+      market_cap_change_24h: 12,
+      price: 206980,
+      imgSrc: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
     },
     {
       id: 3,
       name: 'Decentraland',
-      market_cap_change_24h: 6
+      market_cap_change_24h: 6,
+      price: 76.96,
+      imgSrc: 'https://assets.coingecko.com/coins/images/325/large/Tether-logo.png'
     },
     {
       id: 4,
       name: 'Gala',
-      market_cap_change_24h: 28
+      market_cap_change_24h: 28,
+      price: 10.71,
+      imgSrc: 'https://assets.coingecko.com/coins/images/12493/large/GALA-COINGECKO.png',
     },
     {
       id: 5,
       name: 'Theta',
-      market_cap_change_24h: 34
+      market_cap_change_24h: 34,
+      price: 169.01,
+      imgSrc: 'https://assets.coingecko.com/coins/images/2538/large/theta-token-logo.png'
     },
   ]
-export {COLORS,MostGainedCoins};
+  const MostGainedCoins2 = [
+    {
+      id: 1,
+      name: 'Bitcoin',
+      percentage: 5.8,
+      imgSrc: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+    },
+    {
+      id: 2,
+      name: 'Ethereum',
+      percentage: 4.9,
+      imgSrc: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
+    },
+    {
+      id: 3,
+      name: 'Decentraland',
+      percentage: 4.7,
+      imgSrc: 'https://assets.coingecko.com/coins/images/325/large/Tether-logo.png'
+    },
+    {
+      id: 4,
+      name: 'Gala',
+      percentage: 4.5,
+      imgSrc: 'https://assets.coingecko.com/coins/images/12493/large/GALA-COINGECKO.png',
+    },
+    {
+      id: 5,
+      name: 'Theta',
+      percentage: 4.5,
+      imgSrc: 'https://assets.coingecko.com/coins/images/2538/large/theta-token-logo.png'
+    },
+  ];
+  const profitCoins = [
+    {
+      id: 1,
+      name: 'Alpaca Finance',
+      percentage: 45,
+      imgSrc: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+    },
+    {
+      id: 2,
+      name: 'Theta',
+      percentage: 40,
+      imgSrc: 'https://assets.coingecko.com/coins/images/2538/large/theta-token-logo.png'
+    },
+    {
+      id: 3,
+      name: 'Enjin Coin',
+      percentage: 34,
+      imgSrc: 'https://assets.coingecko.com/coins/images/1102/large/enjin-coin-logo.png'
+    },
+    {
+      id: 4,
+      name: 'Wax',
+      percentage: 28.84,
+      imgSrc: 'https://assets.coingecko.com/coins/images/1372/large/WAX_Coin_Tickers_P_512px.png'
+    },
+    {
+      id: 5,
+      name: 'Shiba Inu',
+      percentage: 24.42,
+      imgSrc: 'https://assets.coingecko.com/coins/images/11939/large/shiba.png'
+    },
+  ];
+  const lossCoins = [
+    {
+      id: 1,
+      name: 'Sushi',
+      percentage: -33.2
+    },
+    {
+      id: 2,
+      name: 'Apecoin',
+      percentage: -22.24
+    },
+    {
+      id: 3,
+      name: 'COTI',
+      percentage: -14.43
+    },
+    {
+      id: 4,
+      name: 'Tether',
+      percentage: -5.04
+    },
+    {
+      id: 5,
+      name: 'Stacks',
+      percentage: -4.42
+    },
+  ];
+  const trustedCoins = [
+    {
+      id: 1,
+      name: 'Bitcoin',
+      percentage: 45
+    },
+    {
+      id: 2,
+      name: 'Ethereum',
+      percentage: 40
+    },
+    {
+      id: 3,
+      name: 'BNB',
+      percentage: 34
+    },
+    {
+      id: 4,
+      name: 'Solana',
+      percentage: 28.84
+    },
+    {
+      id: 5,
+      name: 'Cardano',
+      percentage: 24.42
+    },
+  ];
+  const memeCoins = [
+    {
+      id: 1,
+      name: 'Shiba Inu',
+      percentage: 45
+    },
+    {
+      id: 2,
+      name: 'Dogecoin',
+      percentage: 40
+    },
+    {
+      id: 3,
+      name: 'Saitama',
+      percentage: 34
+    },
+    {
+      id: 4,
+      name: ' Puli',
+      percentage: 28.84
+    },
+    {
+      id: 5,
+      name: 'Babydogecoin',
+      percentage: 24.42
+    },
+  ];
+  const banners = [
+    {
+      id: 1,
+      imgSrc: banner1,
+    },
+    {
+      id: 2,
+      imgSrc: banner2,
+    },
+    {
+      id: 3,
+      imgSrc: banner3,
+    },
+    {
+      id: 4,
+      imgSrc: banner4,
+    },
+    {
+      id: 5,
+      imgSrc: banner5,
+    }
+  ]
+  
+  
+export {COLORS,MostGainedCoins,MostGainedCoins2,profitCoins,lossCoins,trustedCoins,memeCoins,banners  };

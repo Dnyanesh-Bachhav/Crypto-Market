@@ -4,27 +4,32 @@ import { COLORS } from './constants';
 const CARD_HEIGHT = Dimensions.get('window').height/5;
 const CARD_WIDTH = Dimensions.get('window').width/3;
 import {useNavigation} from '@react-navigation/native';
-function Card({coinName,percentage}){
+function Card({coinName,percentage,price,coinId,imgUrl }){
   const navigation = useNavigation();
   return(
     <View style={styles.container}>
       <TouchableOpacity onPress={()=>{
-        console.log("CoinName: "+coinName);
+        console.log("CoinName: "+percentage);
         navigation.navigate("coinDetails",{
-          coin: coinName
+          coin: coinName,
+          coinId: coinId,
+          imgUrl: imgUrl || "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
         });
       }} >
         
       <View style={styles.card}>
         <Image
         style={styles.imgStyle}
-        source={require("../assets/MANA_Logo.jpg")}
+        source={{
+          uri: imgUrl || "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+        }}
+        // source={require("../assets/MANA_Logo.jpg")}
         />
         <Text style={styles.coinNameText}>{coinName}</Text>
-        <Text>₹21.12</Text>
+        <Text>₹{price ? price : 500 }</Text>
         { percentage > 0 ?
         <Text style={styles.coinPercentage}>{percentage.toFixed(2)}%</Text>
-        : <Text style={styles.coinPercentageRed}>{percentage.toFixed(2)}%</Text>
+        : <Text style={styles.coinPercentageRed}>{Number.parseFloat(percentage).toFixed(2)}%</Text>
         }
       </View>
       </TouchableOpacity>
@@ -37,6 +42,7 @@ const styles = StyleSheet.create({
     height: CARD_HEIGHT,
     flex: 1,
     flexDirection: 'column',
+    elevation: 5
   },
   card:{
     backgroundColor: COLORS.white,

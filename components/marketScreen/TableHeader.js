@@ -5,9 +5,9 @@ function TableHeader(){
     return(
         <View style={styles.container}>
             <View style={styles.tableHeader}>
-                <Text style={styles.thead}>COINS NAME</Text>
-                <Text style={styles.thead}>PRICE</Text>
-                <Text style={styles.thead}>PERCENTAGE</Text>
+                <Text style={{textAlign: 'right',...styles.thead}}>COINS NAME</Text>
+                <Text style={{textAlign: 'right',...styles.thead}}>PRICE</Text>
+                <Text style={{textAlign: 'right',...styles.thead}}>PERCENTAGE</Text>
             </View>
         </View>
     );
@@ -20,11 +20,13 @@ const styles = StyleSheet.create({
     tableHeader:{
         color: COLORS.gray,
         flexDirection: 'row',
-        justifyContent: 'space-evenly'
+        // justifyContent: 'space-evenly'
     },
     thead:{
         color: COLORS.grayDark,
-        fontSize: 12
+        fontSize: 12,
+        flex: 1,
+        // borderWidth: 1
     }
 });
 export default TableHeader;

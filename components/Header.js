@@ -1,6 +1,7 @@
 import React from 'react'; 
-import {View,Text,Image,StyleSheet,StatusBar} from 'react-native';
+import {View,Text,Image,StyleSheet,StatusBar,TouchableOpacity} from 'react-native';
 import {COLORS} from './constants';
+import { AntDesign } from '@expo/vector-icons';
 function Header(){
   return(
     <View style={styles.container}>
@@ -11,6 +12,12 @@ function Header(){
         />
       </View>
     <Text style={styles.textStyle}>CoinStack</Text>
+    <View style={styles.iconStyle}>
+    <TouchableOpacity>
+      {/* <AntDesign name="caretdown" size={21} color={COLORS.white}/> */}
+    </TouchableOpacity>
+    </View>
+
     </View>
   );
 }
@@ -18,7 +25,8 @@ const styles = StyleSheet.create({
   container:{
     flexDirection: 'row',
     backgroundColor: COLORS.primary,
-    padding: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 5
   },
   textStyle:{
     color: "#fff",
@@ -33,6 +41,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     justifyContent:'center',
     alignContent: 'center'
+  },
+
+  iconStyle:{
+    justifyContent: 'center',
+    alignItems:'center',
+    marginLeft: 'auto'
   }
 })
 export default Header;
