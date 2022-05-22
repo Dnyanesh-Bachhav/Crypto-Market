@@ -14,6 +14,7 @@ function Header(){
     <Text style={styles.textStyle}>CoinStack</Text>
     <View style={styles.iconStyle}>
     <TouchableOpacity>
+      {/* Add Element */}
       {/* <AntDesign name="caretdown" size={21} color={COLORS.white}/> */}
     </TouchableOpacity>
     </View>
