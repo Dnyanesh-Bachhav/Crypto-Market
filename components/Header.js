@@ -6,18 +6,19 @@ function Header(){
   return(
     <View style={styles.container}>
       <View style={{justifyContent: 'center'}}>
+        {/* App Logo */}
         <Image 
-        style={styles.imgStyle}
-        source={require('../assets/coinmarketcap-logo.png')}
+          style={styles.imgStyle}
+          source={require('../assets/coinmarketcap-logo.png')}
         />
       </View>
-    <Text style={styles.textStyle}>CoinStack</Text>
-    <View style={styles.iconStyle}>
-    <TouchableOpacity>
-      {/* Add Element */}
-      {/* <AntDesign name="caretdown" size={21} color={COLORS.white}/> */}
-    </TouchableOpacity>
-    </View>
+      <Text style={styles.textStyle}>CoinStack</Text>
+      <View style={styles.iconStyle}>
+        <TouchableOpacity>
+          {/* Add Element */}
+          {/* <AntDesign name="caretdown" size={21} color={COLORS.white}/> */}
+        </TouchableOpacity>
+      </View>
 
     </View>
   );
