@@ -8,6 +8,8 @@ function SellCoinScreen({route}){
     const[itemQuantity,setItemQuantity] = useState(0);
     const[inputVal,setInputVal] = useState(null);
     const[disabledBtn,setDisabledBtn] = useState(true);
+
+    const[isValidData,setIsValidData] = useState(false);
     const {portfolioCoins,storePortfolioCoin,updatePortfolioCoins } = useContext(portfolioContext);
     const itemExists = portfolioCoins.some(coin=> coin.name === route.params.name);
     function getData(){
@@ -41,8 +43,14 @@ function SellCoinScreen({route}){
             <TextInput style={styles.textInput} placeholder="Enter a quantity"
              keyboardType="number-pad"
              onChangeText={(data)=>{
-                if(data>0 && data<=itemQuantity) 
-                setInputVal(data);
+                if(data>0 && parseFloat(data)<=itemQuantity) 
+                {
+                    setInputVal(data);
+                    setIsValidData(true);
+                }
+                else{
+                    setIsValidData(false);
+                }
             }
 
              }
@@ -62,9 +70,16 @@ function SellCoinScreen({route}){
                             if(coin.name === route.params.name)
                             {
                                 // console.log("coin found: "+coin.name+"item name: "+route.params.name+" isTrue: "+(coin.name === route.params.name));
-                                let val = parseFloat(coin.quantity)
-                                val -= parseFloat(inputVal);
-                                coin.quantity = val;
+                                let val = parseFloat(coin.quantity);
+                                if(val <= parseFloat(coin.quantity) && val>=0)
+                                {
+                                    setIsValidData(true);
+                                    val -= parseFloat(inputVal);
+                                    coin.quantity = val.toFixed(4);
+                                }
+                                else{
+                                    setIsValidData(false);
+                                }
                                 setItemQuantity(coin.quantity);
                                 console.log("Item quantity: "+coin.quantity);
                                 console.log("Item quantity 1: "+typeof itemQuantity);
@@ -82,7 +97,13 @@ function SellCoinScreen({route}){
                             }
                         );
                     }
-                    ToastAndroid.show("Coin sold successfully...",1000);
+                    if(isValidData)
+                    {
+                        ToastAndroid.show("Coin sold successfully...",1000);
+                    }
+                    else{
+                        ToastAndroid.show("Please input a valid value...",1000);                        
+                    }
                 }
             } >
                 <Button button_text={"Sell"} backColor={itemExists ? COLORS.red : COLORS.gray} />
