@@ -11,7 +11,14 @@ function MainLists(){
     async function getData(){
         setLoading(true);
         const data = await getMarketHighChangedData();
-        setArrayData(data);
+        let array1 = [];
+        // Get top 10 coins
+        for(let i=0;i<10;i++)
+        {
+            array1.push(data[i]);
+        }
+        console.log(array1.length);
+        setArrayData(array1);
         setLoading(false);
     }
     async function getTopMarketCoins(){
@@ -28,13 +35,13 @@ function MainLists(){
         <View style={styles.container}>
             {/* Newly Launched */}
             <TitleText title="Newly Launched..." descriptionText="Explore more assets for your portfolio"/>
-            <ListCoins coinData={MostGainedCoins} />
+            <ListCoins coinData={MostGainedCoins} type={"NewlyLaunched"} />
             {/* Most Gained Coins */}
             <TitleText title="Top Gainers..." descriptionText="Coins that have gain the most in 24 hours"/>
-            <ListCoins coinData={arrayData} />
+            <ListCoins coinData={arrayData} type={"MostGained"} />
             {/* Most Lossed Coins */}
             <TitleText title="Popular coins..." descriptionText="People usually buy these coins..."/>
-            <ListCoins coinData={topCoins} />
+            <ListCoins coinData={topCoins} type={"Popular"} />
             {/* <TitleText title="Crypto News" descriptionText="News in the market..."/> */}
 
         </View>
@@ -42,6 +49,7 @@ function MainLists(){
 }
 const styles = StyleSheet.create({
     container:{
+        marginEnd: 10
     }
 });
 

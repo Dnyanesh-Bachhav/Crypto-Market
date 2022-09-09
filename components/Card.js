@@ -25,7 +25,7 @@ function Card({coinName,percentage,price,coinId,imgUrl }){
         }}
         // source={require("../assets/MANA_Logo.jpg")}
         />
-        <Text style={styles.coinNameText}>{coinName}</Text>
+        <Text style={styles.coinNameText} numberOfLines={1}>{coinName}</Text>
         <Text>₹{price ? price : 500 }</Text>
         { percentage > 0 ?
         <Text style={styles.coinPercentage}>{percentage.toFixed(2)}%</Text>
