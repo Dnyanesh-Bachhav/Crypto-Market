@@ -81,7 +81,7 @@ function PortfolioScreen(){
               {
                 portfolioCoins.length > 0 ? 
                 ( portfolioCoins.map((item,index)=>(
-                  <InvestCoinCard coinId={item.name} quantity={item.quantity} price={`${Math.round(item.price*item.quantity)}`} imgSrc={item.imgSrc} key={index} />
+                  <InvestCoinCard coinId={item.name} quantity={item.quantity} price={`${Math.round(item.price*item.quantity)}`} imgSrc={item.imgSrc} key={index} setInvested={setInvested} setCurrent={setCurrent} />
                   )))
                 : <NoCoin/>
             }

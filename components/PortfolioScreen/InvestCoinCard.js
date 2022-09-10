@@ -4,11 +4,18 @@ import { COLORS } from '../constants';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { portfolioContext } from '../../Contexts/PortfolioContext';
-function InvestCoinCard({coinId,price,imgSrc,quantity}){
+function InvestCoinCard({coinId,price,imgSrc,quantity,setInvested,setCurrent}){
     const {portfolioCoins,updatePortfolioCoins } = useContext(portfolioContext);
     function removeCoin(){
      const data = portfolioCoins.filter(coin=> coin.name !== coinId);
      updatePortfolioCoins(data);
+     
+     if(portfolioCoins.length==1)
+     {
+        console.log("Portfolio coins length==0");
+        setInvested(0);
+        setCurrent(0);
+     }
     }
     return(
         <View style={styles.container}>

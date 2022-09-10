@@ -14,6 +14,7 @@ function HomeScreen(){
 
         setConnected(data.isConnected);
     }
+
     useEffect(()=>{
         checkConnection();
     },[]);

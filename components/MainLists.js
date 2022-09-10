@@ -4,6 +4,7 @@ import { MostGainedCoins } from "./constants";
 import ListCoins from "./Listcoins";
 import TitleText from "./TitleText";
 import {getMarketHighChangedData, getTopCoins } from '../Services/requests';
+import { getExchanges,getTopCoinsCoinMarketCap } from "../Services/requestsCoinMarketCap";
 function MainLists(){
     const [arrayData,setArrayData] = useState([]);
     const [topCoins,setTopCoins] = useState([]);
@@ -27,7 +28,18 @@ function MainLists(){
         setTopCoins(data);
         setLoading(false);
     }
+    
+    async function getData1(){
+        const topCoinsArray = await getTopCoinsCoinMarketCap();
+        const exchanges = await getExchanges();
+        console.log(exchanges);
+        // for( let i=0;i<25;i++)
+        // {
+        //     console.log(exchanges.data[i].name);
+        // }
+    }
     useEffect(()=>{
+        getData1();
         getData();
         getTopMarketCoins();
     },[]);

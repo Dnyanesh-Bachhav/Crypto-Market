@@ -10,6 +10,7 @@ import trust from '../assets/trust.png';
 import meme from '../assets/meme_doge.png';
 import loss from '../assets/loss.jpg';
 import loss1 from '../assets/loss1.png';
+import { getData, getTopCoins } from "../Services/requestsCoinMarketCap";
 function BasketsScreen(){
     const [connected,setConnected] = useState(true);
     const checkConnection = async ()=>{
@@ -17,8 +18,17 @@ function BasketsScreen(){
 
         setConnected(data.isConnected);
     }
+    async function getData1(){
+        const topCoinsArray = await getTopCoins();
+        for( let i=0;i<10;i++)
+        {
+            console.log(topCoinsArray.data[i].name);
+        }
+    }
     useEffect(()=>{
+        console.log("Basket Screen...")
         checkConnection();
+        getData1();
     },[]);
     return(
         <>
