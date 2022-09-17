@@ -1,8 +1,9 @@
 import axios from "axios";
-const getAllNews = async()=>{
+const getAllNews = async(searchTerm)=>{
+    console.log("Search Term: "+searchTerm);
     try{
         const API_KEY = "ad29876714ad402d8ff6d245ca83c690";
-        const url = `https://newsapi.org/v2/everything?q=bitcoin&apiKey=${API_KEY}`;
+        const url = `https://newsapi.org/v2/everything?q=${searchTerm}&apiKey=${API_KEY}`;
         const response = await axios.get(url);
         // console.log(data);
         // console.log(data.articles);
