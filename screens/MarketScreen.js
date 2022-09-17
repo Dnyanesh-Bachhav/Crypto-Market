@@ -75,10 +75,10 @@ function MarketScreen(){
                                 <CoinItem coinName={item.name} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h} />
                         </TouchableOpacity>
                     )}
-                    onEndReached={()=>
+                    onEndReached={async()=>
                         {
                             console.log("End: ");
-                            fetchData((coinsData.length/50)+1);
+                            await fetchData((coinsData.length/50)+1);
                         }}
                     maxToRenderPerBatch={16}
                     refreshControl={<RefreshControl refreshing={loading} onRefresh={refetchData} />}

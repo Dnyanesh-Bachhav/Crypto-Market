@@ -9,6 +9,9 @@ import { COLORS } from "../components/constants";
 import HomeStack from "../Stacks/HomeStack";
 import BasketsStack from "../Stacks/BasketStack";
 import MarketStack from "../Stacks/MarketStack";
+import NewsScreen from "../screens/NewsScreen";
+
+
 
 const Tab = createBottomTabNavigator();
 function Tabs(){
@@ -52,6 +55,20 @@ function Tabs(){
                     </View>
                 )
             }} />
+            <Tab.Screen name="News" component={NewsScreen} options={{
+                    headerShown: false,
+                    unmountOnBlur: true,
+                    tabBarIcon: ({focused})=>(
+                        <View style={styles.tabOption}>
+                        {/* <TouchableOpacity> */}
+                            <Image source={require("../assets/newspaper.png")} style={{
+                                tintColor: focused ? COLORS.primary : COLORS.black,
+                                ...styles.imgStyle}}/>
+                            <Text style={{color: focused ? COLORS.primary : COLORS.black,}} >News</Text>
+                        {/* </TouchableOpacity> */}
+                        </View>
+                    )
+                }} />
             <Tab.Screen name="Baskets" component={BasketsStack} options={{
                 headerShown: false,
                 tabBarIcon: ({focused})=>(

@@ -1,0 +1,16 @@
+import axios from "axios";
+const getAllNews = async()=>{
+    try{
+        const API_KEY = "ad29876714ad402d8ff6d245ca83c690";
+        const url = `https://newsapi.org/v2/everything?q=bitcoin&apiKey=${API_KEY}`;
+        const response = await axios.get(url);
+        // console.log(data);
+        // console.log(data.articles);
+        return response.data;
+    }
+    catch(err){
+        console.log("Error: "+ err);
+    }
+}
+
+export { getAllNews };
