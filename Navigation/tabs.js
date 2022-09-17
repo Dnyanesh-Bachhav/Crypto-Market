@@ -10,6 +10,7 @@ import HomeStack from "../Stacks/HomeStack";
 import BasketsStack from "../Stacks/BasketStack";
 import MarketStack from "../Stacks/MarketStack";
 import NewsScreen from "../screens/NewsScreen";
+import NewsStack from "../Stacks/NewsStack";
 
 
 
@@ -55,7 +56,7 @@ function Tabs(){
                     </View>
                 )
             }} />
-            <Tab.Screen name="News" component={NewsScreen} options={{
+            <Tab.Screen name="News" component={NewsStack} options={{
                     headerShown: false,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused})=>(

@@ -3,10 +3,13 @@ import { View, Text, Image, StyleSheet, ScrollView, FlatList, Dimensions, Toucha
 import { COLORS } from '../components/constants';
 import { getAllNews } from '../Services/requestsNewsApi';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import Header from '../components/Header';
 const CARD_HEIGHT = Dimensions.get('window').height / 5;
 const CARD_WIDTH = Dimensions.get('window').width / 3;
 function NewsScreen() {
     const [news, setNews] = useState([]);
+    const navigation = useNavigation();
     const [searchTerm, setSearchTerm] = useState("bitcoin");
     async function getNews(str) {
         if (str == null)
@@ -34,12 +37,13 @@ function NewsScreen() {
         getNews(searchTerm);
     }, [searchTerm]);
     return (
+            <>
+            {/* <Header/> */}
         <View style={styles.container}>
-
-            <Text>NEWS SCREEN</Text>
+            {/* <Text>NEWS SCREEN</Text> */}
 
             <TextInput
-                placeholder="eg. CryptoCurrency"
+                placeholder="Search news"
                 onSubmitEditing={(event) => {
                     console.log(event.nativeEvent.text);
                     setSearchTerm(event.nativeEvent.text);
@@ -56,15 +60,27 @@ function NewsScreen() {
                 renderItem={({ item, index }) => (
 
                     <>
+                    <TouchableOpacity onPress={()=>{
+                        navigation.navigate("DetailNews",{
+                            sourceName : item.source.name,
+                            imageUrl : item.urlToImage,
+                            title: item.title,
+                            author: item.author,
+                            description: item.description,
+                            url: item.url,
+                            publishedAt : item.publishedAt,
+                            content : item.content
 
+                        })
+                    }} >
                         <View key={index} style={styles.card} >
                             <Image source={{
                                 uri: item.urlToImage
                             }} style={styles.imgStyle} />
-                            <Text style={styles.sourceStyle}>{item.source.name}</Text>
-                            <Text style={styles.titleStyle}> {item.title.trim()}</Text>
+                            <Text style={styles.titleStyle}>{item.title.toString().trim()}</Text>
 
                             <View style={styles.cardBottom}>
+                                <Text style={styles.sourceStyle}>{item.source.name}</Text>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', marginRight: 4 }} >
 
                                     <TouchableOpacity onPress={() => {
@@ -75,6 +91,7 @@ function NewsScreen() {
                                 </View>
                             </View>
                         </View>
+                        </TouchableOpacity>
                     </>
 
                 )
@@ -83,6 +100,7 @@ function NewsScreen() {
             />
 
         </View>
+        </>
     );
 }
 
@@ -93,14 +111,17 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         marginHorizontal: 10,
+        paddingTop: 10
 
     },
     imgStyle: {
         width: '100%',
         height: CARD_HEIGHT,
         resizeMode: 'cover',
-
-        borderRadius: 12
+        // borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 12,
+        marginBottom: 5
 
     },
     card: {
@@ -112,23 +133,31 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         fontWeight: '700',
+        fontSize: 18,
         textAlign: 'left'
     },
     cardBottom: {
         flex: 1,
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     sourceStyle: {
-        fontSize: 21,
+        fontSize: 16,
         fontWeight: 'bold',
-        color: COLORS.primary,
+        color: COLORS.grayDark,
     },
     inputStyle: {
-        borderColor: COLORS.gray,
-        borderWidth: 1,
+        borderColor: COLORS.grayDark,
+        borderWidth: 1.5,
+        color: COLORS.black,
         borderRadius: 5,
-        marginBottom: 10,
-        padding: 5,
+        marginBottom: 20,
+        backgroundColor: COLORS.white,
+        padding: 10,
+        width: '95%',
+        alignSelf: 'center',
+        elevation: 10
     }
 
 })
