@@ -72,7 +72,15 @@ function NewsScreen() {
                             content : item.content
 
                         })
-                    }} >
+                    }}>
+                        <View style={{width: '95%',
+        padding: 10,
+        marginLeft: 10,
+        borderRadius: 10,
+        borderColor: COLORS.grayDark,
+        backgroundColor: COLORS.white,
+        marginTop:15,
+        elevation: 5}}>
                         <View key={index} style={styles.card} >
                             <Image source={{
                                 uri: item.urlToImage
@@ -90,6 +98,7 @@ function NewsScreen() {
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                        </View>
                         </View>
                         </TouchableOpacity>
                     </>
@@ -110,8 +119,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         height: '100%',
-        marginHorizontal: 10,
-        paddingTop: 10
+        // paddingHorizontal: 10,
+        paddingTop: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
 
     },
     imgStyle: {
@@ -126,10 +137,13 @@ const styles = StyleSheet.create({
     },
     card: {
         width: '100%',
-        borderBottomWidth: 1,
-        borderBottomColor: COLORS.gray,
+        // borderBottomWidth: 1,
+        // borderBottomColor: COLORS.gray,
         marginBottom: 12,
-        paddingBottom: 5
+        paddingBottom: 5,
+        // borderWidth: 1.5,
+        padding: 10,
+        backgroundColor: COLORS.white,
     },
     titleStyle: {
         fontWeight: '700',
