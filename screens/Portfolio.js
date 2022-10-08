@@ -11,6 +11,7 @@ import { Entypo } from '@expo/vector-icons';
 import InfoText from "../components/PortfolioScreen/InfoText";
 import { portfolioContext } from "../Contexts/PortfolioContext";
 import NoCoin from "../components/PortfolioScreen/NoCoin";
+import { MaterialIcons } from '@expo/vector-icons';
 function PortfolioScreen(){
   const {portfolioCoins,removeAllCoins } = useContext(portfolioContext);
     const [connected,setConnected] = useState(true);
@@ -50,13 +51,23 @@ function PortfolioScreen(){
       <>
         {connected ? (
           <View style={styles.container}>
-            <TouchableOpacity onPress={()=>{
-              removeAllCoins();
-              setInvested(0);
-              setCurrent(0);
-            }} >
-              <Text>Clear...</Text>
-            </TouchableOpacity>
+          <View style={{display: 'flex',alignItems: 'center', flexDirection: 'row',justifyContent: 'space-between'}} >
+          <View>
+
+          <Text style={{fontWeight: 'bold',color: COLORS.primary,marginLeft: 10,fontSize: 20}}>Portfolio</Text>
+          </View>
+          <TouchableOpacity onPress={()=>{
+            removeAllCoins();
+            setInvested(0);
+            setCurrent(0);
+          }}>
+            <View style={{display: 'flex', flexDirection: 'row',alignSelf: 'flex-end', justifyContent: 'center',alignItems: 'center',backgroundColor: COLORS.primary,padding: 5, paddingHorizontal: 10, borderRadius: 10,marginRight: 10 }} >
+              <Text style={{color: COLORS.white, }} >Clear</Text>
+              <MaterialIcons name="delete-sweep" size={20} color="white" style={{marginLeft: 5}} />
+            </View>
+          </TouchableOpacity>
+
+          </View>
             <ModalPopUp visible={visible}>
               <View>
                 <View style={styles.modalHeader}>

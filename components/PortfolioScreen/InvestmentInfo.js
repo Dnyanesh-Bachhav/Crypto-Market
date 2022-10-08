@@ -26,13 +26,16 @@ function InvestmentInfo({invested,current}){
 }
 const styles = StyleSheet.create({
     container:{
-        width: '100%',
-        borderWidth: 1,
-        borderColor: COLORS.gray,
+        width: '98%',
+        backgroundColor: COLORS.white,
         padding: 10,
-        marginTop: 10,
         borderRadius: 10,
+        // borderColor: COLORS.grayDark,
+        backgroundColor: COLORS.white,
+        marginTop:15,
         marginBottom: 10,
+        alignSelf: 'center',
+        elevation: 5
     },
     textStyle:{
         color: COLORS.grayDark,
