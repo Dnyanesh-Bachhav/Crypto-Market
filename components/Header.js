@@ -1,16 +1,22 @@
 import React from 'react'; 
-import {View,Text,Image,StyleSheet,StatusBar,TouchableOpacity} from 'react-native';
+import {View,Text,Image,StyleSheet,StatusBar,TouchableOpacity, Pressable} from 'react-native';
 import {COLORS} from './constants';
 import { AntDesign } from '@expo/vector-icons';
-function Header(){
+import { FontAwesome5 } from '@expo/vector-icons';
+function Header({navigation}){
   return(
     <View style={styles.container}>
       <View style={{justifyContent: 'center'}}>
         {/* App Logo */}
-        <Image 
+        <Pressable onPress={()=>{
+          navigation.openDrawer();
+        }} >
+        {/* <Image 
           style={styles.imgStyle}
           source={require('../assets/coinmarketcap-logo.png')}
-        />
+          /> */}
+          <FontAwesome5 name="bars" size={21} color={COLORS.white}/>
+          </Pressable>
       </View>
       <Text style={styles.textStyle}>CoinStack</Text>
       <View style={styles.iconStyle}>

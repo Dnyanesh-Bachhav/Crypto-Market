@@ -1,3 +1,4 @@
+import HomeScreen from './screens/HomeScreen';
 import react,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { COLORS } from './components/constants';
@@ -6,6 +7,8 @@ import Tabs from './Navigation/tabs';
 import NetInfo from '@react-native-community/netinfo';
 import NoInternetScreen from './screens/NoInternetScreen';
 import PortfolioContextProvider from './Contexts/PortfolioContext';
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export default function App() {
   const [connected,setConnected] = useState(true);
@@ -16,7 +19,9 @@ export default function App() {
   useEffect(()=>{
     getNetworkData();
   },[]);
+  const Drawer = createDrawerNavigator();
   return (
+    
     <View style={styles.container}>
     {
       connected ?
@@ -26,6 +31,7 @@ export default function App() {
             <Tabs/>
         </NavigationContainer>
       </PortfolioContextProvider>
+      
       </>
     : <NoInternetScreen/>
     

@@ -3,11 +3,13 @@ import {View,Text,StyleSheet,ScrollView,TouchableOpacity} from 'react-native';
 import Banner from "../components/Banner";
 import Header from '../components/Header';
 import MainLists from "../components/MainLists";
-import {useNavigation} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import NetInfo from '@react-native-community/netinfo';
 import NoInternetScreen from "./NoInternetScreen";
 import Carousel from 'react-native-snap-carousel';
-function HomeScreen(){
+import PortfolioContextProvider from "../Contexts/PortfolioContext";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+function HomeScreen({navigation}){
     const [connected,setConnected] = useState(true);
     const checkConnection = async ()=>{
         const data = await NetInfo.fetch();
@@ -18,13 +20,14 @@ function HomeScreen(){
     useEffect(()=>{
         checkConnection();
     },[]);
-
+    const Drawer = createDrawerNavigator();
     return(
         <>
+        
             { 
                 connected ? 
                     <View style={styles.container}>
-                        <Header/>
+                        <Header navigation={navigation} />
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <Banner/>
                             <MainLists/>
