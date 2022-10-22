@@ -11,7 +11,9 @@ function CustomDrawer(props) {
         <View style={styles.container}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: COLORS.secondary }}>
                 <View style={styles.userInfo}>
+                    <View style={{backgroundColor: COLORS.white,width: 100,height: 100,alignItems: 'center',justifyContent: 'center', borderRadius:50}} >
                     <Image source={user} style={{width: 80,height: 80,borderRadius: 40 }} />
+                    </View>
                     <Text style={{marginLeft: 10,fontSize: 20}} >Dnyanesh Bachhav</Text>
                     <View style={{flexDirection: 'row',paddingTop: 5 }}>
                     <Text style={{marginLeft: 10,fontSize: 20}} >100 coins</Text>
