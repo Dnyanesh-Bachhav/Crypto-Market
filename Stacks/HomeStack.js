@@ -15,6 +15,8 @@ import { Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import GreedAndFearIndexScreen from '../screens/GreedAndFearIndexScreen';
 const HomeScreenStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 function DrawerStack(){
@@ -55,6 +57,12 @@ function DrawerStack(){
             options={{
                 drawerIcon: ({color})=>(
                     <FontAwesome name="line-chart" size={24} color={color} />
+                )
+            }} />
+            <Drawer.Screen name="Greed and Fear Index" component={GreedAndFearIndexScreen} 
+            options={{
+                drawerIcon: ({color})=>(
+                    <MaterialIcons name="speed" size={24} color="black" />
                 )
             }} />
         </Drawer.Navigator>
