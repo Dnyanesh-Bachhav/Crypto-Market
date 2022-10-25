@@ -57,6 +57,7 @@ function GreedAndFearIndexScreen() {
             </Speedometer> */}
             <RNSpeedometer value={98} size={290}
             wrapperStyle={styles.speedometerStyle}
+            easeDuration={200}
             labels= {[
                 {
                   name: 'Extreme Fear',

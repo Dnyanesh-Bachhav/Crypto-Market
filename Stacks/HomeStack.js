@@ -17,6 +17,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import GreedAndFearIndexScreen from '../screens/GreedAndFearIndexScreen';
+import TransactionHistoryScreen from '../screens/TransactionHistoryScreen';
+import { FontAwesome5 } from '@expo/vector-icons';
 const HomeScreenStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 function DrawerStack(){
@@ -62,7 +64,13 @@ function DrawerStack(){
             <Drawer.Screen name="Greed and Fear Index" component={GreedAndFearIndexScreen} 
             options={{
                 drawerIcon: ({color})=>(
-                    <MaterialIcons name="speed" size={24} color="black" />
+                    <MaterialIcons name="speed" size={24} color={color} />
+                )
+            }} />
+            <Drawer.Screen name="Transaction History" component={TransactionHistoryScreen} 
+            options={{
+                drawerIcon: ({color})=>(
+                    <FontAwesome5 name="history" size={24} color={color} />
                 )
             }} />
         </Drawer.Navigator>
