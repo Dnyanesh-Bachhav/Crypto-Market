@@ -1,12 +1,23 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "./constants";
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import user from "../assets/user.png";
-
+import * as Sharing from "expo-sharing";
 function CustomDrawer(props) {
+   async function handleShare(){
+        const isSharingAvailable = await Sharing.isAvailableAsync();
+        if(isSharingAvailable)
+        {
+            console.log("Sharing is available...");
+            Sharing.shareAsync("../assets/banner1.png");
+        }
+        else{
+            Alert.alert("Sharing is not available...");
+        }
+    }
     return (
         <View style={styles.container}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: COLORS.secondary }}>
@@ -25,7 +36,9 @@ function CustomDrawer(props) {
                 </View>
             </DrawerContentScrollView>
             <View style={styles.bottomContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    handleShare();
+                }} >
                     <View style={styles.bottomListItem}>
                         <Entypo name="share" size={24} color="black" />
                         <Text style={{marginLeft: 5}} >Tell a friend</Text>
