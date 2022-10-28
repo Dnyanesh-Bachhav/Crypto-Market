@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import Speedometer, {
     Background,
     Arc,
@@ -11,6 +11,8 @@ import Speedometer, {
 import {COLORS} from '../components/constants';
 
 import RNSpeedometer from 'react-native-speedometer'
+import { useEffect, useState } from 'react';
+import { getGreedAndFearIndex } from '../Services/requests';
 
 
 // 0-25 Extreme Fear
@@ -19,7 +21,17 @@ import RNSpeedometer from 'react-native-speedometer'
 // 54-75 Greed
 // 75-100 Extreme Greed
 
+
 function GreedAndFearIndexScreen() {
+  const[gfi,setGfi] = useState(null);
+  const getGFI = async ()=>{
+    const data = await getGreedAndFearIndex();
+    console.log("Data:"+data.fgi.now.value);
+    setGfi(data.fgi.now.value);
+  }
+  useEffect(()=>{
+    getGFI();
+  },[]);
     return (
         <View style={styles.container}>
             <Text style={styles.textStyle}>Greed and Fear Index</Text>
@@ -55,37 +67,43 @@ function GreedAndFearIndexScreen() {
     )}
     </Indicator>
             </Speedometer> */}
-            <RNSpeedometer value={98} size={290}
-            wrapperStyle={styles.speedometerStyle}
-            easeDuration={200}
-            labels= {[
-                {
-                  name: 'Extreme Fear',
-                  labelColor: COLORS.black,
-                  activeBarColor: '#ff2900',
-                },
-                {
-                  name: 'Fear',
-                  labelColor: COLORS.black,
-                  activeBarColor: '#ff5400',
-                },
-                {
-                  name: 'Neutral',
-                  labelColor: COLORS.black,
-                  activeBarColor: '#f4ab44',
-                },
-                {
-                  name: 'Greed',
-                  labelColor: COLORS.black,
-                  activeBarColor: '#14eb6e',
-                },
-                {
-                  name: 'Extreme Greed',
-                  labelColor: COLORS.black,
-                  activeBarColor: '#00ff6b',
-                },
-              ]}
-            />
+            {
+              gfi ? <RNSpeedometer value={gfi} size={290}
+              wrapperStyle={styles.speedometerStyle}
+              easeDuration={200}
+              labels= {[
+                  {
+                    name: 'Extreme Fear',
+                    labelColor: COLORS.black,
+                    activeBarColor: '#ff2900',
+                  },
+                  {
+                    name: 'Fear',
+                    labelColor: COLORS.black,
+                    activeBarColor: '#ff5400',
+                  },
+                  {
+                    name: 'Neutral',
+                    labelColor: COLORS.black,
+                    activeBarColor: '#f4ab44',
+                  },
+                  {
+                    name: 'Greed',
+                    labelColor: COLORS.black,
+                    activeBarColor: '#14eb6e',
+                  },
+                  {
+                    name: 'Extreme Greed',
+                    labelColor: COLORS.black,
+                    activeBarColor: '#00ff6b',
+                  },
+                ]}
+              />
+            :
+            
+            <ActivityIndicator size={"small"} color={COLORS.black} />
+          
+          }
          </View>
     );
 }

@@ -55,4 +55,38 @@ const getAllCoins = async ()=>{
         console.log("Error"+e);
     }
 }
-export {getCoins,getTopCoins,getMarketHighChangedData,getCoinHistory,getCoinDataById,getAllCoins};
+
+const getGreedAndFearIndex = async ()=>{
+    const options = {
+      method: 'GET',
+      url: 'https://fear-and-greed-index.p.rapidapi.com/v1/fgi',
+      headers: {
+        'X-RapidAPI-Key': 'd31707d86bmsh91925082bd9357dp154bddjsnc26d58a2b380',
+        'X-RapidAPI-Host': 'fear-and-greed-index.p.rapidapi.com'
+      }
+    };
+    try{
+        const response = await axios.request(options);
+        console.log(response.data);
+        return response.data;
+    }
+    catch(e)
+    {
+        console.log("Error occured: "+e);
+    }
+
+}
+export {getCoins,getTopCoins,getMarketHighChangedData,getCoinHistory,getCoinDataById,getAllCoins,getGreedAndFearIndex};
+
+
+
+
+
+
+
+
+
+
+
+
+
