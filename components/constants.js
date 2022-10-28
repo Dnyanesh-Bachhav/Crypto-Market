@@ -13,7 +13,8 @@ const COLORS = {
     success: '#067A0A',
     lightGreen: '#E2F0E5',
     red: '#780606',
-    lightRed: '#ffe6e6'
+    lightRed: '#ffe6e6',
+    brown: '#d17338',
 }
 const MostGainedCoins = [
     {
