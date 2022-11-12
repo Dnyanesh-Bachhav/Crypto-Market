@@ -35,7 +35,7 @@ function CustomDrawer(props) {
                     <DrawerItemList {...props} />
                 </View>
             </DrawerContentScrollView>
-            {/* <View style={styles.bottomContainer}>
+            <View style={styles.bottomContainer}>
                 <TouchableOpacity onPress={()=>{
                     handleShare();
                 }} >
@@ -50,7 +50,7 @@ function CustomDrawer(props) {
                         <Text style={{marginLeft: 5}} >Sign Out</Text>
                     </View>
                 </TouchableOpacity>
-            </View> */}
+            </View>
         </View>
 
     );
