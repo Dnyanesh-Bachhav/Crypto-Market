@@ -67,12 +67,12 @@ function DrawerStack(){
                     <MaterialIcons name="speed" size={24} color={color} />
                 )
             }} />
-            {/* <Drawer.Screen name="Transaction History" component={TransactionHistoryScreen} 
+            <Drawer.Screen name="Transaction History" component={TransactionHistoryScreen} 
             options={{
                 drawerIcon: ({color})=>(
                     <FontAwesome5 name="history" size={24} color={color} />
                 )
-            }} /> */}
+            }} />
         </Drawer.Navigator>
     );
 }

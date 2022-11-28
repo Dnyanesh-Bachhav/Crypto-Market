@@ -1,13 +1,4 @@
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import Speedometer, {
-    Background,
-    Arc,
-    Needle,
-    Progress,
-    Marks,
-    Indicator,
-    DangerPath,
-} from 'react-native-cool-speedometer';
 import {COLORS} from '../components/constants';
 
 import RNSpeedometer from 'react-native-speedometer'
