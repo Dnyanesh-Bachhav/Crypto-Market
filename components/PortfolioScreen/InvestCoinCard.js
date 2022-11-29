@@ -4,6 +4,8 @@ import { COLORS } from '../constants';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { portfolioContext } from '../../Contexts/PortfolioContext';
+
+
 function InvestCoinCard({coinId,price,imgSrc,quantity,setInvested,setCurrent}){
     const {portfolioCoins,updatePortfolioCoins } = useContext(portfolioContext);
     function removeCoin(){

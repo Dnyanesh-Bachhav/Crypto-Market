@@ -6,18 +6,27 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import user from "../assets/user.png";
 import * as Sharing from "expo-sharing";
-function CustomDrawer(props) {
-   async function handleShare(){
-        const isSharingAvailable = await Sharing.isAvailableAsync();
-        if(isSharingAvailable)
-        {
-            console.log("Sharing is available...");
-            Sharing.shareAsync("../assets/banner1.png");
-        }
-        else{
-            Alert.alert("Sharing is not available...");
-        }
+import { Asset, useAssets } from "expo-asset";
+async function handleShare(){
+       const isAvailable = await Sharing.isAvailableAsync();
+
+    if(isAvailable)
+    {
+        const [asset,error] = useAssets(require("../assets/logo.png"));
+        console.log(asset);
+        console.log("Sharing is available...");
+        await Sharing.shareAsync({
+            dialogTitle: "Download the app Now...!!!"
+        })
+        // await Sharing.shareAsync("../assets/banner1.png");
     }
+    else{
+        Alert.alert("Sharing is not available...");
+    }
+
+}
+function CustomDrawer(props) {
+   
     return (
         <View style={styles.container}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: COLORS.secondary }}>
