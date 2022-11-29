@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   textStyle:{
-    fontWeight: "600",
+    fontWeight: "400",
     fontSize: 24
   },
   descriptionText:{
