@@ -2,11 +2,13 @@ import { StyleSheet, Text, View } from "react-native";
 import { Octicons } from '@expo/vector-icons';
 import { COLORS } from "../components/constants";
 import { FontAwesome } from '@expo/vector-icons';
+import DrawerScreenHeader from "../components/HomeScreen/DrawerScreenHeader";
 
 function TransactionHistoryScreen() {
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: 18,marginLeft: 10,fontWeight: "500",marginBottom: 10 }} >Transactions List</Text>
+            <DrawerScreenHeader headerText="Transactions List" />
+            {/* <Text style={{ fontSize: 18,marginLeft: 10,fontWeight: "500",marginBottom: 10 }} >Transactions List</Text> */}
             <BuyItem />
             <BuyItem />
             <BuyItem />
@@ -38,6 +40,7 @@ function BuyItem() {
 function SellItem() {
     return (
         <View style={styles.row}>
+            
             <View style={{ flexDirection: 'row' }}>
                 <View style={{...styles.iconStyle,backgroundColor: COLORS.lightRed }}>
                     <Octicons name="upload" size={24} color={COLORS.red} />

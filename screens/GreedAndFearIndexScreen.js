@@ -5,6 +5,7 @@ import RNSpeedometer from 'react-native-speedometer'
 import { useEffect, useState } from 'react';
 import { getGreedAndFearIndex } from '../Services/requests';
 import HistoricalDataGFI from '../components/GreedAndFearIndexScreen/HistoricalDataGFI';
+import DrawerScreenHeader from '../components/HomeScreen/DrawerScreenHeader';
 
 
 // 0-25 Extreme Fear
@@ -52,7 +53,8 @@ function GreedAndFearIndexScreen() {
   },[]);
     return (
         <View style={styles.container}>
-            <Text style={styles.textStyle}>Greed and Fear Index</Text>
+            <DrawerScreenHeader headerText={"Greed and Fear Index"} />
+            {/* <Text style={styles.textStyle}>Greed and Fear Index</Text> */}
             
             {
               gfi ? <RNSpeedometer value={gfi} size={290}
@@ -104,7 +106,9 @@ function GreedAndFearIndexScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 10
+        // justifyContent: 'center',
+        // alignItems: 'center'
+        // paddingHorizontal: 10
     },
     speedometerStyle:{
         marginTop: 20,
@@ -114,11 +118,13 @@ const styles = StyleSheet.create({
     textStyle:{
         fontSize: 25,
         fontWeight: '700',
+        
         color: COLORS.primary,
     },
     headerStyle:{
       marginTop: 15,
       textAlign: 'left',
+      marginLeft: 20,
       fontSize: 25,
       fontWeight: 'bold',
       color: COLORS.primary
