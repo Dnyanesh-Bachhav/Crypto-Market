@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Octicons } from '@expo/vector-icons';
 import { COLORS } from "../components/constants";
 import { FontAwesome } from '@expo/vector-icons';
@@ -19,21 +19,30 @@ function TransactionHistoryScreen() {
         <View style={styles.container}>
             <DrawerScreenHeader headerText="Transactions List" />
             {/* <Text style={{ fontSize: 18,marginLeft: 10,fontWeight: "500",marginBottom: 10 }} >Transactions List</Text> */}
+            {/* <BuyItem />
             <BuyItem />
             <BuyItem />
             <BuyItem />
             <BuyItem />
-            <BuyItem />
-            <SellItem />
-            {/* {
+            <SellItem /> */}
+            <ScrollView>
+
+            {
                 transactions.map((item,index)=>(
-                    <Text>{ item.name }</Text>
+                    <View>
+                    {    
+                    item.type == "Buy"
+                    ? <BuyItem name={item.name} date={item.date} coin={item.coin} quantity={item.quantity} />
+                    : <SellItem name={item.name} date={item.date} coin={item.coin} quantity={item.quantity} />
+                }
+                    </View>
                 ))
-            } */}
+            }
+            </ScrollView>
         </View>
     );
 }
-function BuyItem() {
+function BuyItem({ name,date,coin,quantity }) {
     return (
         <View style={styles.row}>
             <View style={{ flexDirection: 'row' }}>
@@ -42,17 +51,17 @@ function BuyItem() {
                 </View>
                 <View style={{ marginLeft: 10 }} >
                     <Text style={{...styles.headerStyle,color: COLORS.success}}>Buy</Text>
-                    <Text style={{color: COLORS.grayDark, }} >29/11/2022 11:22AM</Text>
+                    <Text style={{color: COLORS.grayDark, }} >{ date!= null ? date : "29/11/2022 11:22AM" }</Text>
                 </View>
             </View>
             <View style={styles.quantityStyle}>
-                <Text style={{ marginRight: 5, fontSize: 16 }} >102.7 BTC</Text>
+                <Text style={{ marginRight: 5, fontSize: 16 }} >{ quantity } { coin }</Text>
                 <FontAwesome name="angle-right" size={20} color={COLORS.gray}/>
             </View>
         </View>
     );
 }
-function SellItem() {
+function SellItem({ name,date,coin,quantity }) {
     return (
         <View style={styles.row}>
             
@@ -62,11 +71,11 @@ function SellItem() {
                 </View>
                 <View style={{ marginLeft: 10 }} >
                     <Text style={{...styles.headerStyle,color:COLORS.red }}>Sell</Text>
-                    <Text style={{color: COLORS.grayDark, }} >29/11/2022 11:22AM</Text>
+                    <Text style={{color: COLORS.grayDark, }} >{ date!= null ? date : "29/11/2022 11:22AM" }</Text>
                 </View>
             </View>
             <View style={styles.quantityStyle}>
-                <Text style={{ marginRight: 5, fontSize: 16 }} >102.7 BTC</Text>
+                <Text style={{ marginRight: 5, fontSize: 16 }} >{ quantity } { coin }</Text>
                 <FontAwesome name="angle-right" size={20} color={COLORS.gray}/>
             </View>
         </View>

@@ -38,14 +38,15 @@ function TransactionContextProvider({children}){
     //     console.log("Coin data: "+ data);
     //     setTransactions(data);
     // }
-    // const removeAllCoins = async ()=>{
-    //     const array1 = [];
-    //     const jsonValue = JSON.stringify(array1);
-    //     await AsyncStorage.setItem("@portfolio_coins",jsonValue);
-    //     setTransactions(array1);
-    // }
+    const removeAllCoins = async ()=>{
+        const array1 = [];
+        const jsonValue = JSON.stringify(array1);
+        await AsyncStorage.setItem("@transactions",jsonValue);
+        setTransactions(array1);
+    }
     useEffect(()=>{
         getTransactions();
+        removeAllCoins();
     },[]);
     return(
         <transactionContext.Provider value={{ transactions, storeTransaction }} >

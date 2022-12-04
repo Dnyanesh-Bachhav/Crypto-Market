@@ -4,6 +4,7 @@ import { COLORS } from "../components/constants";
 import Button from "../components/marketScreen/Button";
 import Header from "../components/marketScreen/Header";
 import { portfolioContext } from "../Contexts/PortfolioContext";
+import { transactionContext } from "../Contexts/TransactionContext";
 function SellCoinScreen({route}){
     const[itemQuantity,setItemQuantity] = useState(0);
     const[inputVal,setInputVal] = useState(null);
@@ -11,7 +12,36 @@ function SellCoinScreen({route}){
 
     const[isValidData,setIsValidData] = useState(false);
     const {portfolioCoins,storePortfolioCoin,updatePortfolioCoins } = useContext(portfolioContext);
+    const { transactions, storeTransaction } = useContext(transactionContext);
     const itemExists = portfolioCoins.some(coin=> coin.name === route.params.name);
+    function addZero(item){
+        if(item<10)
+        {
+            return "0"+item;
+        }
+        return item;
+    }
+
+    function configureDate(){
+        const d = new Date();
+        let time = "";
+        let day = d.getDate();
+        let month = d.getMonth() + 1;
+        let year = d.getFullYear();
+        let hours = addZero(d.getHours());
+        let minutes = addZero(d.getMinutes());
+        if(hours<12)
+        {
+            time = "AM";
+        }
+        else{
+            if( hours>=12 && minutes>0)
+            {
+                time = "PM";
+            }
+        }
+        return day + "/" + month + "/" + year + " " + hours + ":" + minutes + " " + time;
+    }
     function getData(){
         if(itemExists)
         {
@@ -86,6 +116,13 @@ function SellCoinScreen({route}){
                             }
                         });
                         updatePortfolioCoins(portfolioCoins);
+                        storeTransaction({
+                            name: route.params.name,
+                            type: "Sell",
+                            date: configureDate(),
+                            coin: route.params.symbol.toUpperCase(),
+                            quantity: inputVal
+                        });
                     }
                     else{
                         storePortfolioCoin(
@@ -96,6 +133,13 @@ function SellCoinScreen({route}){
                                 quantity: itemQuantity
                             }
                         );
+                        storeTransaction({
+                            name: route.params.name,
+                            type: "Sell",
+                            date: configureDate(),
+                            coin: route.params.symbol.toUpperCase(),
+                            quantity: inputVal
+                        });
                     }
                     if(isValidData)
                     {

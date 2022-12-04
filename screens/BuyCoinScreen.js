@@ -7,12 +7,41 @@ import { portfolioContext } from "../Contexts/PortfolioContext";
 import { transactionContext } from "../Contexts/TransactionContext";
 function BuyCoinScreen({route}){
     const[itemQuantity,setItemQuantity] = useState();
+    const[date,setDate] = useState(null);
     const {portfolioCoins,storePortfolioCoin,updatePortfolioCoins } = useContext(portfolioContext);
     const { transactions, storeTransaction } = useContext(transactionContext);
     const itemExists = portfolioCoins.some(coin=> coin.name === route.params.name);
 
     console.log( transactions );
-    
+    function addZero(item){
+        if(item<10)
+        {
+            return "0"+item;
+        }
+        return item;
+    }
+
+    function configureDate(){
+        const d = new Date();
+        let time = "";
+        let day = d.getDate();
+        let month = d.getMonth() + 1;
+        let year = d.getFullYear();
+        let hours = addZero(d.getHours());
+        let minutes = addZero(d.getMinutes());
+        if(hours<12)
+        {
+            time = "AM";
+        }
+        else{
+            if( hours>=12 && minutes>0)
+            {
+                time = "PM";
+            }
+        }
+        return day + "/" + month + "/" + year + " " + hours + ":" + minutes + " " + time;
+    }
+
     return(
         <View style={styles.container}>
             <Header coinName={route.params.name} imgSrc={route.params.imgSrc} />
@@ -49,6 +78,13 @@ function BuyCoinScreen({route}){
                             }
                         });
                         updatePortfolioCoins(portfolioCoins);
+                        storeTransaction({
+                            name: route.params.name,
+                            type: "Buy",
+                            date: configureDate(),
+                            coin: route.params.symbol.toUpperCase(),
+                            quantity: itemQuantity
+                        });
                     }
                     else{
                         storePortfolioCoin(
@@ -61,9 +97,10 @@ function BuyCoinScreen({route}){
                         );
                         storeTransaction({
                             name: route.params.name,
-                                price: route.params.price,
-                                imgSrc: route.params.imgSrc,
-                                quantity: itemQuantity
+                            type: "Buy",
+                            date: configureDate(),
+                            coin: route.params.symbol.toUpperCase(),
+                            quantity: itemQuantity
                         });
                     }
                     ToastAndroid.show("Coin bought successfully...",1000);
