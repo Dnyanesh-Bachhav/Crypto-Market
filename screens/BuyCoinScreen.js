@@ -4,10 +4,14 @@ import { COLORS } from "../components/constants";
 import Button from "../components/marketScreen/Button";
 import Header from "../components/marketScreen/Header";
 import { portfolioContext } from "../Contexts/PortfolioContext";
+import { transactionContext } from "../Contexts/TransactionContext";
 function BuyCoinScreen({route}){
     const[itemQuantity,setItemQuantity] = useState();
     const {portfolioCoins,storePortfolioCoin,updatePortfolioCoins } = useContext(portfolioContext);
+    const { transactions, storeTransaction } = useContext(transactionContext);
     const itemExists = portfolioCoins.some(coin=> coin.name === route.params.name);
+
+    console.log( transactions );
     
     return(
         <View style={styles.container}>
@@ -55,6 +59,12 @@ function BuyCoinScreen({route}){
                                 quantity: itemQuantity
                             }
                         );
+                        storeTransaction({
+                            name: route.params.name,
+                                price: route.params.price,
+                                imgSrc: route.params.imgSrc,
+                                quantity: itemQuantity
+                        });
                     }
                     ToastAndroid.show("Coin bought successfully...",1000);
                 }

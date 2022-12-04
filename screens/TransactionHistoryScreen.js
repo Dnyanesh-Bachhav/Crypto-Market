@@ -3,8 +3,18 @@ import { Octicons } from '@expo/vector-icons';
 import { COLORS } from "../components/constants";
 import { FontAwesome } from '@expo/vector-icons';
 import DrawerScreenHeader from "../components/HomeScreen/DrawerScreenHeader";
+import { useContext, useEffect } from "react";
+import { transactionContext } from "../Contexts/TransactionContext";
 
 function TransactionHistoryScreen() {
+    const { transactions, storeTransaction } = useContext(transactionContext);
+
+    console.log( transactions );
+    
+    console.log( transactions);
+    useEffect(()=>{
+
+    },[]);
     return (
         <View style={styles.container}>
             <DrawerScreenHeader headerText="Transactions List" />
@@ -15,6 +25,11 @@ function TransactionHistoryScreen() {
             <BuyItem />
             <BuyItem />
             <SellItem />
+            {/* {
+                transactions.map((item,index)=>(
+                    <Text>{ item.name }</Text>
+                ))
+            } */}
         </View>
     );
 }

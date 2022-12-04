@@ -7,6 +7,7 @@ import Tabs from './Navigation/tabs';
 import NetInfo from '@react-native-community/netinfo';
 import NoInternetScreen from './screens/NoInternetScreen';
 import PortfolioContextProvider from './Contexts/PortfolioContext';
+import TransactionContextProvider from './Contexts/TransactionContext';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -27,9 +28,12 @@ export default function App() {
       connected ?
       <>
       <PortfolioContextProvider>
+        <TransactionContextProvider>
+
         <NavigationContainer>
             <Tabs/>
         </NavigationContainer>
+        </TransactionContextProvider>
       </PortfolioContextProvider>
       
       </>
