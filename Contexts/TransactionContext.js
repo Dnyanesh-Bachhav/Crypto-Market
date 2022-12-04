@@ -38,7 +38,7 @@ function TransactionContextProvider({children}){
     //     console.log("Coin data: "+ data);
     //     setTransactions(data);
     // }
-    const removeAllCoins = async ()=>{
+    const removeAllTransactions = async ()=>{
         const array1 = [];
         const jsonValue = JSON.stringify(array1);
         await AsyncStorage.setItem("@transactions",jsonValue);
@@ -46,7 +46,7 @@ function TransactionContextProvider({children}){
     }
     useEffect(()=>{
         getTransactions();
-        removeAllCoins();
+        // removeAllTransactions();
     },[]);
     return(
         <transactionContext.Provider value={{ transactions, storeTransaction }} >

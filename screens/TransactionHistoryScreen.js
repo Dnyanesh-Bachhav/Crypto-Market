@@ -28,7 +28,7 @@ function TransactionHistoryScreen() {
             <ScrollView>
 
             {
-                transactions.map((item,index)=>(
+                transactions.slice(0).reverse().map((item,index)=>(
                     <View>
                     {    
                     item.type == "Buy"
