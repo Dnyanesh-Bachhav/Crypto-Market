@@ -8,8 +8,6 @@ import { transactionContext } from "../Contexts/TransactionContext";
 
 function TransactionHistoryScreen() {
     const { transactions, storeTransaction } = useContext(transactionContext);
-
-    console.log( transactions );
     
     console.log( transactions);
     useEffect(()=>{
