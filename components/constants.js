@@ -58,30 +58,35 @@ const MostGainedCoins = [
       id: 1,
       name: 'Bitcoin',
       percentage: 5.8,
+      price: "1,402,338",
       imgSrc: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
     },
     {
       id: 2,
       name: 'Ethereum',
       percentage: 4.9,
+      price: "103,670",
       imgSrc: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
     },
     {
       id: 3,
       name: 'Decentraland',
       percentage: 4.7,
+      price: "34.42",
       imgSrc: 'https://assets.coingecko.com/coins/images/325/large/Tether-logo.png'
     },
     {
       id: 4,
       name: 'Gala',
       percentage: 4.5,
+      price: "2.29",
       imgSrc: 'https://assets.coingecko.com/coins/images/12493/large/GALA-COINGECKO.png',
     },
     {
       id: 5,
       name: 'Theta',
       percentage: 4.5,
+      price: "73.63",
       imgSrc: 'https://assets.coingecko.com/coins/images/2538/large/theta-token-logo.png'
     },
   ];
@@ -90,30 +95,35 @@ const MostGainedCoins = [
       id: 1,
       name: 'Alpaca Finance',
       percentage: 45,
-      imgSrc: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+      price: "23.09",
+      imgSrc: 'https://assets.coingecko.com/coins/images/14165/large/Logo200.png'
     },
     {
       id: 2,
       name: 'Theta',
       percentage: 40,
+      price: "73.63",
       imgSrc: 'https://assets.coingecko.com/coins/images/2538/large/theta-token-logo.png'
     },
     {
       id: 3,
       name: 'Enjin Coin',
       percentage: 34,
+      price: "26.01",
       imgSrc: 'https://assets.coingecko.com/coins/images/1102/large/enjin-coin-logo.png'
     },
     {
       id: 4,
       name: 'Wax',
       percentage: 28.84,
+      price: "4.87",
       imgSrc: 'https://assets.coingecko.com/coins/images/1372/large/WAX_Coin_Tickers_P_512px.png'
     },
     {
       id: 5,
       name: 'Shiba Inu',
       percentage: 24.42,
+      price: "0.00077269",
       imgSrc: 'https://assets.coingecko.com/coins/images/11939/large/shiba.png'
     },
   ];

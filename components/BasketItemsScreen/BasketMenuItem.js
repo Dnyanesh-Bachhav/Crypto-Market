@@ -2,7 +2,7 @@ import react from 'react';
 import {View,Text,StyleSheet,Image} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { COLORS } from '../constants';
-function BasketMenuItem({name, percentage, imgSrc }){
+function BasketMenuItem({name, percentage, imgSrc, price }){
     const per_color = percentage > 0 ? COLORS.success : COLORS.red;
 
     return(
@@ -19,7 +19,7 @@ function BasketMenuItem({name, percentage, imgSrc }){
                 <Text>{name}</Text>
                 <Text>{"btc".toUpperCase()}</Text>
             </View>
-            <Text style={styles.coinPrice}>₹{3200000}</Text>
+            <Text style={styles.coinPrice}>₹{ price || 3200000}</Text>
             <View style={{backgroundColor: percentage > 0 ? COLORS.lightGreen : COLORS.lightRed, ...styles.coinPercentage}}>
                 {console.log("Percentage of coin: "+percentage)}
                 <Text style={{color: per_color,fontWeight: 'bold' }}>{percentage}%</Text>

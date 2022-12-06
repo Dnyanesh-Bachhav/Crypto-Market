@@ -22,7 +22,7 @@ function TransactionHistoryScreen() {
 
             {
                 transactions.slice(0).reverse().map((item,index)=>(
-                    <View>
+                    <View key={index}>
                     {    
                     item.type == "Buy"
                     ? <BuyItem name={item.name} date={item.date} coin={item.coin} quantity={item.quantity} />

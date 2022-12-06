@@ -35,7 +35,7 @@ function BasketItems({route}){
             <FlatList
                 data={arrayData}
                 renderItem={({item})=>(
-                    <BasketMenuItem name={item.name} percentage={item.percentage} imgSrc={item.imgSrc ||"https://assets.coingecko.com/coins/images/1372/large/WAX_Coin_Tickers_P_512px.png" }/>
+                    <BasketMenuItem name={item.name} percentage={item.percentage} imgSrc={item.imgSrc ||"https://assets.coingecko.com/coins/images/1372/large/WAX_Coin_Tickers_P_512px.png" } price={item.price} />
                 )}
                 style={ styles.listStyle }
                 keyExtractor={(item,index)=>index}
