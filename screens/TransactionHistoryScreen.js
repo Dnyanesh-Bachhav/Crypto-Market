@@ -9,10 +9,7 @@ import { transactionContext } from "../Contexts/TransactionContext";
 function TransactionHistoryScreen() {
     const { transactions, storeTransaction } = useContext(transactionContext);
     
-    console.log( transactions);
-    useEffect(()=>{
-
-    },[]);
+    console.log(transactions);
     return (
         <View style={styles.container}>
             <DrawerScreenHeader headerText="Transactions List" />
