@@ -13,8 +13,6 @@ function TransactionHistoryScreen() {
     return (
         <View style={styles.container}>
             <DrawerScreenHeader headerText="Transactions List" />
-            {/* <Text style={{ fontSize: 18,marginLeft: 10,fontWeight: "500",marginBottom: 10 }} >Transactions List</Text> */}
-
             <ScrollView>
 
             {
