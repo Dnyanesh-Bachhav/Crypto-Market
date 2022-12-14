@@ -54,7 +54,6 @@ function GreedAndFearIndexScreen() {
     return (
         <View style={styles.container}>
             <DrawerScreenHeader headerText={"Greed and Fear Index"} />
-            {/* <Text style={styles.textStyle}>Greed and Fear Index</Text> */}
             
             {
               gfi ? <RNSpeedometer value={gfi} size={290}
