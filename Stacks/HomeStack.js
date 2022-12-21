@@ -77,7 +77,7 @@ function DrawerStack(){
             <Drawer.Screen name="Chatbot" component={ChatbotScreen} 
             options={{
                 drawerIcon: ({color})=>(
-                    <FontAwesome5 name="history" size={24} color={color} />
+                    <FontAwesome5 name="robot" size={24} color={color} />
                 )
             }} />
         </Drawer.Navigator>
