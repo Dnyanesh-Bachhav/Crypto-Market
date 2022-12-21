@@ -5,6 +5,7 @@ import coinChartScreen from '../screens/CoinChartScreen';
 import BasketItem from '../screens/BasketItemsScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from '../components/CustomDrawer';
+import ChatbotScreen from '../screens/ChatbotScreen';
 import MarketScreen from '../screens/MarketScreen';
 import NewsScreen from '../screens/NewsScreen';
 import BasketsScreen from '../screens/BasketsScreen';
@@ -68,6 +69,12 @@ function DrawerStack(){
                 )
             }} />
             <Drawer.Screen name="Transaction History" component={TransactionHistoryScreen} 
+            options={{
+                drawerIcon: ({color})=>(
+                    <FontAwesome5 name="history" size={24} color={color} />
+                )
+            }} />
+            <Drawer.Screen name="Chatbot" component={ChatbotScreen} 
             options={{
                 drawerIcon: ({color})=>(
                     <FontAwesome5 name="history" size={24} color={color} />
