@@ -7,7 +7,9 @@ function ChatbotScreen(){
     return(
         <View style={styles.container}>
             <DrawerScreenHeader headerText={"Chatbot"} />
-            <Text>Hello World...!!!</Text>
+            <View style={{justifyContent: 'center',alignItems: 'center'}} >
+                <Text>Chatbot System Powered by ChatGPT</Text>
+            </View>
         </View>
     );
 }
