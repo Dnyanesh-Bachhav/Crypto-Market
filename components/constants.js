@@ -15,6 +15,8 @@ const COLORS = {
     red: '#780606',
     lightRed: '#ffe6e6',
     brown: '#d17338',
+    grey: "#64748B",
+    purple: "#1E293B",
 }
 const MostGainedCoins = [
     {
