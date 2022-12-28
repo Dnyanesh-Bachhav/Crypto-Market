@@ -1,4 +1,11 @@
 import axios from "axios";
+import { Configuration, OpenAIApi } from "openai";
+const API_KEY = "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";
+// OpenAIApi.apiKey = API_KEY;
+const configuration = new Configuration({
+    apiKey: API_KEY,
+  });
+const openai = new OpenAIApi(configuration);
 const getCoins = async (pageNumber=1)=>{
     try{
         const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&price_change_percentage=24h`);
@@ -76,7 +83,18 @@ const getGreedAndFearIndex = async ()=>{
     }
 
 }
-export {getCoins,getTopCoins,getMarketHighChangedData,getCoinHistory,getCoinDataById,getAllCoins,getGreedAndFearIndex};
+async function getChatGPTResponse( promptText ){
+    console.log("Funciton called...");
+    const completion = await openai.createCompletion({
+      model: 'text-davinci-002',
+      prompt: "Hi",
+    //   temperature: 0.6,
+    //   max_tokens: 2048,
+    });
+    console.log(completion.data.choices);
+    return completion.data.choices[0].text;
+}
+export {getCoins,getTopCoins,getMarketHighChangedData,getCoinHistory,getCoinDataById,getAllCoins,getGreedAndFearIndex, getChatGPTResponse };
 
 
 

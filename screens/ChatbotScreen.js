@@ -3,7 +3,8 @@ import { COLORS } from "../components/constants";
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from "react";
-import { Header } from '../components/ChatbotScreen/Header';
+import Header from "../components/ChatbotScreen/Header";
+import { getChatGPTResponse } from "../Services/requests";
 
 // Chatbot Screen powered by ChatGPT
 
@@ -50,12 +51,16 @@ function ReceiveMessage({messageText}){
 }
 
 function InputMessage({text,setText,messages,setMessages}){
-    function handleInputMessage()
+    async function handleInputMessage()
     {
 
         let arr = messages;
         console.log("Type: "+typeof messages);
         arr.push({text, messageType: "user"});
+        setMessages(arr);
+        const response = await getChatGPTResponse(text);
+        console.log("Response: "+response);
+        arr.push({ response, messageType: "chatbot" });
         setMessages(arr);
     }
     return(
