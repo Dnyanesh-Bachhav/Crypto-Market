@@ -1,20 +1,27 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../components/constants";
-import DrawerScreenHeader from "../components/HomeScreen/DrawerScreenHeader";
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from "react";
+import { Header } from '../components/ChatbotScreen/Header';
 
 // Chatbot Screen powered by ChatGPT
 
 function ChatbotScreen(){
     const [text,setText] = useState("");
+    const [ messages, setMessages ] = useState(["0"]);
     return(
         <View style={styles.container}>
-            <DrawerScreenHeader headerText={"Chatbot"} />
-            <SentMessage />
-            <ReceiveMessage />
-            <InputMessage text={text} setText={setText} />
+            <Header headerText={"Chatbot"} />
+            <FlatList 
+            data={messages}
+            renderItem={({item,index})=>(
+                
+                (item.messageType === 'user') ? <SentMessage messageText={item.text} /> : <ReceiveMessage messageText={item.text} />
+            )}
+            keyExtractor={({item,index})=> index}
+            />
+            <InputMessage text={text} setText={setText} messages={messages} setMessages={setMessages} />
         </View>
     );
 }
@@ -23,18 +30,18 @@ function SentMessage({messageText}){
     return(
         <>
         <View style={styles.sentMsgStyle}>
-            <Text style={{color: COLORS.white, }} >Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic nesciunt deserunt eius ab quo voluptate architecto ipsa ipsam neque, quae dicta nam, ut labore blanditiis similique iste odit sed a?</Text>
+            <Text style={{color: COLORS.white, }} >{messageText}</Text>
         </View>
         <Text style={{alignSelf:'flex-end',marginRight: 10, color: COLORS.grey, fontSize: 10 }}>Sent 4:20PM</Text>
         </>
     );
 }
 
-function ReceiveMessage(){
+function ReceiveMessage({messageText}){
     return(
         <>
         <View style={styles.receiveMsgStyle} >
-            <Text style={{color: COLORS.grey, }} >Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam cupiditate vel sit beatae illo id rerum. Ut molestias debitis, culpa ipsa recusandae, excepturi praesentium unde, nihil corrupti dolores accusamus est.</Text>
+            <Text style={{color: COLORS.grey, }} >{messageText}</Text>
         </View>
         <Text style={{alignSelf:'flex-start',marginLeft: 10, color: COLORS.grey, fontSize: 10 }}>4:22PM</Text>
         </>
@@ -42,10 +49,14 @@ function ReceiveMessage(){
     );
 }
 
-function InputMessage({text,setText}){
+function InputMessage({text,setText,messages,setMessages}){
     function handleInputMessage()
     {
-        return <SentMessage messageText={text} />;
+
+        let arr = messages;
+        console.log("Type: "+typeof messages);
+        arr.push({text, messageType: "user"});
+        setMessages(arr);
     }
     return(
         <View style={{ position: 'absolute', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', bottom: 15 }} >
