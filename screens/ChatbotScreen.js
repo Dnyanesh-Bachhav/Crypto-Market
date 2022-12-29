@@ -2,15 +2,35 @@ import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "r
 import { COLORS } from "../components/constants";
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/ChatbotScreen/Header";
-import { getChatGPTResponse } from "../Services/requests";
+import { Configuration, OpenAIApi } from "openai";
+const API_KEY = "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";
 
 // Chatbot Screen powered by ChatGPT
+const configuration = new Configuration({
+    apiKey: API_KEY,
+  });
+const openai = new OpenAIApi(configuration);
 
 function ChatbotScreen(){
     const [text,setText] = useState("");
     const [ messages, setMessages ] = useState(["0"]);
+
+    
+            
+    useEffect( ()=>{
+        openai.createCompletion({
+            model: 'text-davinci-002',
+            prompt: "Hi",
+            temperature: 0.7,
+            max_tokens: 256,
+        }).then((response)=>{
+            console.log("HI there:"+ response.data.choices[0].text);
+            setText(response.data.choices[0].text);
+            
+        });
+    },[]);
     return(
         <View style={styles.container}>
             <Header headerText={"Chatbot"} />
@@ -51,7 +71,7 @@ function ReceiveMessage({messageText}){
 }
 
 function InputMessage({text,setText,messages,setMessages}){
-    async function handleInputMessage()
+   async function handleInputMessage()
     {
 
         let arr = messages;
@@ -60,6 +80,7 @@ function InputMessage({text,setText,messages,setMessages}){
         setMessages(arr);
         const response = await getChatGPTResponse(text);
         console.log("Response: "+response);
+        // setText(response);
         arr.push({ response, messageType: "chatbot" });
         setMessages(arr);
     }
