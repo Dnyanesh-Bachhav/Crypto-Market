@@ -2,10 +2,13 @@ import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "r
 import { COLORS } from "../components/constants";
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "../components/ChatbotScreen/Header";
 import { Configuration, OpenAIApi } from "openai";
+import { Bubble, GiftedChat } from 'react-native-gifted-chat';
+import { FontAwesome } from '@expo/vector-icons';
 const API_KEY = "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";
+
 
 // Chatbot Screen powered by ChatGPT
 const configuration = new Configuration({
@@ -15,34 +18,113 @@ const openai = new OpenAIApi(configuration);
 
 function ChatbotScreen(){
     const [text,setText] = useState("");
-    const [ messages, setMessages ] = useState(["0"]);
+    const [messages, setMessages] = useState([]);
+    
+    const onSend = useCallback((messages = []) => {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+      }, []);
+    
+    const renderBubble = (props)=>{
+        return(
 
+            <Bubble
+            {...props}
+            wrapperStyle={{
+                right:{
+                    backgroundColor: COLORS.purple,
+                    padding: 5,
+                    borderRadius: 5,
+                    elevation: 2,
+                },
+                left:{
+                    backgroundColor: COLORS.white,
+                    padding: 5,
+                    borderRadius: 5,
+                    elevation: 2,
+                }
+            }}
+            textStyle={{
+                right:{
+                    color: COLORS.gray,
+                },
+                left:{
+                    color: COLORS.gray,
+                }
+            }}
+            
+            />
+            );
+    }
+    const scrollToBottomComponent = ()=>{
+        return(
+            <FontAwesome name="angle-double-down" size={24} color="black" />
+        );
+    }
     
             
     useEffect( ()=>{
-        openai.createCompletion({
-            model: 'text-davinci-002',
-            prompt: "Hi",
-            temperature: 0.7,
-            max_tokens: 256,
-        }).then((response)=>{
-            console.log("HI there:"+ response.data.choices[0].text);
-            setText(response.data.choices[0].text);
+        // openai.createCompletion({
+        //     model: 'text-davinci-002',
+        //     prompt: "Hi",
+        //     temperature: 0.7,
+        //     max_tokens: 256,
+        // }).then((response)=>{
+        //     console.log("HI there:"+ response.data.choices[0].text);
+        //     setText(response.data.choices[0].text);
             
-        });
+        // });
+        setMessages([
+            {
+              _id: 1,
+              text: 'Hello developer',
+              createdAt: new Date(),
+              user: {
+                _id: 2,
+                name: 'React Native',
+                avatar: require("../assets/robot1.jpg")
+              },
+            },
+            {
+                _id: 2,
+                text: 'Hello World...!!!',
+                createdAt: new Date(),
+                user: {
+                  _id: 1,
+                  name: 'React Native',
+                  avatar: 'https://placeimg.com/140/140/any',
+                },
+              },
+          ])
     },[]);
     return(
         <View style={styles.container}>
             <Header headerText={"Chatbot"} />
-            <FlatList 
+            {/* <FlatList 
             data={messages}
             renderItem={({item,index})=>(
                 
                 (item.messageType === 'user') ? <SentMessage messageText={item.text} /> : <ReceiveMessage messageText={item.text} />
             )}
             keyExtractor={({item,index})=> index}
+            /> */}
+            <GiftedChat
+                messages={messages}
+                onSend={messages => onSend(messages)}
+                user={{
+                    _id: 1,
+                }}
+                renderBubble={renderBubble}
+                scrollToBottom
+                scrollToBottomComponent={scrollToBottomComponent}
+                // textInputStyle={{
+                //     borderWidth: 1,
+                //     padding: 5,
+                //     borderRadius: 8,
+                //     borderColor: COLORS.grey,
+                // }}
             />
-            <InputMessage text={text} setText={setText} messages={messages} setMessages={setMessages} />
+            
+            {/* <InputMessage text={text} setText={setText} messages={messages} setMessages={setMessages} /> */}
         </View>
     );
 }
