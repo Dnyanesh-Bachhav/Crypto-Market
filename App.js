@@ -10,6 +10,7 @@ import PortfolioContextProvider from './Contexts/PortfolioContext';
 import TransactionContextProvider from './Contexts/TransactionContext';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import 'react-native-get-random-values';
 
 export default function App() {
   const [connected,setConnected] = useState(true);

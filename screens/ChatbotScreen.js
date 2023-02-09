@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, messageIdGenerator } from "react-native";
 import { COLORS } from "../components/constants";
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -7,8 +7,13 @@ import Header from "../components/ChatbotScreen/Header";
 import { Configuration, OpenAIApi } from "openai";
 import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from "axios";
 const API_KEY = "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";
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from "uuid";
+import { getChatbotReply1 } from "../Services/requests";
 
+const API_URL = "https://coinstack-backend.vercel.app/api";
 
 // Chatbot Screen powered by ChatGPT
 const configuration = new Configuration({
@@ -16,17 +21,93 @@ const configuration = new Configuration({
   });
 const openai = new OpenAIApi(configuration);
 
+const BOT = {
+    _id: 2,
+    name: 'Jarvis',
+    avatar: require("../assets/robot1.jpg")
+  };
+
 function ChatbotScreen(){
     const [text,setText] = useState("");
     const [messages, setMessages] = useState([]);
-    
-    const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    const [data, setData] = useState();
+    const [loading,setLoading] = useState(false);
+
+    const getChatbotReply = async (message)=>{
+        if(loading)
+        {
+            return;
+        }
+        setLoading(true);
+        let reply = "";
+            axios.post("https://coinstack-backend.vercel.app/api/hello",
+                {message},
+                // { headers: {"Content-Type": "application/json"}}
+            ).then((response)=>{
+                console.log(JSON.stringify(response));
+                console.log(typeof response);
+                const d1 = response;
+                console.log("hi"+d1.data.result);
+                setData(d1.data.result.trim());
+                console.log("Actual data: "+data);
+                reply = d1.data.result.trim();
+                return d1.data.result;
+            }).catch((e)=>{
+                    console.log("Error: "+e);
+                    Alert.alert("Something went wrong!");
+            }).finally(()=>{
+                    setLoading(false);
+                    // return data;
+                    let message = {
+                        _id: uuidv4(),
+                        text: reply,
+                        createdAt: new Date(),
+                        user: {
+                          _id: 2,
+                          name: 'React Native',
+                          avatar: require("../assets/robot1.jpg")
+                        },
+                      };
+                      setMessages(previousMessages => GiftedChat.append(previousMessages, [message]));
+                      setData(null);
+            });
+            // console.log("Reply from chatbott:"+ d1.result);
+            // setData(d1.result);
+
+        
+        
+
+    };
+    // console.log("Chatbot Data: "+data);
+    const handleBotResponse = async (msg)=>{
+        const response = await getChatbotReply(msg);
+        console.log("response:"+response);
+        
+        // let message = {
+        //     _id: messages.length + 1,
+        //     text: response,
+        //     createdAt: new Date(),
+        //     user: BOT,
+        // }
+        // setMessages(previousMessages => GiftedChat.append(previousMessages, [message]));
+
+
+    }
+    const onSend = useCallback( async (messages = []) => {
+
+        console.log("Data12:"+ JSON.stringify(messages));
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
+        await getChatbotReply(messages[0].text);
+        
+        // setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
       }, []);
     
     const renderBubble = (props)=>{
         return(
-
+            <>
+            {
+                loading && <ActivityIndicator size={"small"} color={COLORS.black} />
+            }
             <Bubble
             {...props}
             wrapperStyle={{
@@ -53,6 +134,7 @@ function ChatbotScreen(){
             }}
             
             />
+            </>
             );
     }
     const scrollToBottomComponent = ()=>{
@@ -60,7 +142,10 @@ function ChatbotScreen(){
             <FontAwesome name="angle-double-down" size={24} color="black" />
         );
     }
-    
+    const getData1 = async()=>{
+        let data = await getChatbotReply1("Hi");
+        console.log("Data: "+data);
+    }
             
     useEffect( ()=>{
         // openai.createCompletion({
@@ -94,7 +179,8 @@ function ChatbotScreen(){
                   avatar: 'https://placeimg.com/140/140/any',
                 },
               },
-          ])
+          ]);
+          getData1();
     },[]);
     return(
         <View style={styles.container}>
@@ -114,6 +200,9 @@ function ChatbotScreen(){
                     _id: 1,
                 }}
                 renderBubble={renderBubble}
+                onQuickReply={(msg)=>{
+                    // console.log("reply from bot..."+msg);
+                }}
                 scrollToBottom
                 scrollToBottomComponent={scrollToBottomComponent}
                 // textInputStyle={{
