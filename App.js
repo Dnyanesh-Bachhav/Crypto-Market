@@ -1,6 +1,6 @@
 import HomeScreen from './screens/HomeScreen';
 import react,{useEffect,useState} from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
 import { COLORS } from './components/constants';
 import { NavigationContainer } from '@react-navigation/native';
 import Tabs from './Navigation/tabs';
@@ -24,7 +24,7 @@ export default function App() {
   const Drawer = createDrawerNavigator();
   return (
     
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
     {
       connected ?
       <>
@@ -43,7 +43,8 @@ export default function App() {
     
   }
     <StatusBar style="auto" backgroundColor={COLORS.primary} styles={styles.statusBarStyle} />
-    </View>
+    </SafeAreaView>
+    
   );
 }
 

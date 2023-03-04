@@ -105,9 +105,9 @@ function ChatbotScreen(){
     const renderBubble = (props)=>{
         return(
             <>
-            {
+            {/* {
                 loading && <ActivityIndicator size={"small"} color={COLORS.black} />
-            }
+            } */}
             <Bubble
             {...props}
             wrapperStyle={{

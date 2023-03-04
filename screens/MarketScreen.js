@@ -14,6 +14,7 @@ import Button from "../components/marketScreen/Button";
 import {COLORS} from '../components/constants';
 import Button1 from "../components/marketScreen/Button1";
 import SheetComponent from "../components/marketScreen/BottomSheetItem";
+import { FlashList } from "@shopify/flash-list";
 function MarketScreen(){
     const refRBSheet = useRef();
     const navigation = useNavigation();
@@ -23,6 +24,7 @@ function MarketScreen(){
     const [coinsData,setCoinsData] = useState([]);
     const [loading,setLoading] = useState(false);
     const [connected,setConnected] = useState(true);
+    const [componentHeight,setComponentHeight] = useState();
     const checkConnection = async ()=>{
         const data = await NetInfo.fetch();
         setConnected(data.isConnected);
@@ -71,19 +73,38 @@ function MarketScreen(){
                                 setCurrentCoin(item);
                                 refRBSheet.current.open();
                                 
-                            }}>
+                            }} >
                                 <CoinItem coinName={item.name} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h} />
                         </TouchableOpacity>
                     )}
-                    onEndReached={async()=>
+                    
+                    onEndReached={()=>
                         {
                             console.log("End: ");
-                            await fetchData((coinsData.length/50)+1);
+                            fetchData((coinsData.length/50)+1);
                         }}
                     maxToRenderPerBatch={16}
                     refreshControl={<RefreshControl refreshing={loading} onRefresh={refetchData} />}
                     keyExtractor={()=>count++}
-                    />)
+                    />
+                    // <FlashList
+                    // data={coinsData}
+                    // showsVerticalScrollIndicator={false}
+                    // renderItem={({item,index})=>(
+                    //     <TouchableOpacity onPress={()=>{
+                    //             setCurrentCoin(item);
+                    //             refRBSheet.current.open();                           
+                    //         }} key={index}>
+                    //             <CoinItem coinName={item.name} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h}  />
+                    //     </TouchableOpacity>
+                    // )}
+                    // onEndReached={()=>fetchData((coinsData.length/50)+1)}
+                    // // maxToRenderPerBatch={16}
+                    // refreshControl={<RefreshControl refreshing={loading} onRefresh={refetchData} />}
+                    // keyExtractor={()=>count++}
+                    // estimatedItemSize={500}
+                    // />
+                    )
                     : <ActivityIndicator/>
                 }
                 {/* <BottomSheet refRBSheet={refRBSheet} coinName={"Tron"} price={"12"} coin={currentCoin} /> */}
