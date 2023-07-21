@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View,Text,StyleSheet,ScrollView,Dimensions,FlatList} from 'react-native';
+import {View,Text,StyleSheet,Dimensions,FlatList} from 'react-native';
 import Card from './Card';
 const SCROLLVIEW_HEIGHT = Dimensions.get('window').height / 4;
 function ListCoins({coinData,type}){

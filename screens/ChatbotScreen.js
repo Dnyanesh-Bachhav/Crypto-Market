@@ -1,6 +1,5 @@
 import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, messageIdGenerator } from "react-native";
 import { COLORS } from "../components/constants";
-import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useCallback, useEffect, useState } from "react";
 import Header from "../components/ChatbotScreen/Header";
