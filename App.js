@@ -30,7 +30,6 @@ export default function App() {
       <>
       <PortfolioContextProvider>
         <TransactionContextProvider>
-
         <NavigationContainer>
             <Tabs/>
         </NavigationContainer>
