@@ -11,6 +11,7 @@ import TransactionContextProvider from './Contexts/TransactionContext';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-get-random-values';
+import WatchlistProvider from './Contexts/WatchListContext';
 
 export default function App() {
   const [connected,setConnected] = useState(true);
@@ -29,11 +30,13 @@ export default function App() {
       connected ?
       <>
       <PortfolioContextProvider>
-        <TransactionContextProvider>
-        <NavigationContainer>
-            <Tabs/>
-        </NavigationContainer>
-        </TransactionContextProvider>
+        <WatchlistProvider>
+          <TransactionContextProvider>
+          <NavigationContainer>
+              <Tabs/>
+          </NavigationContainer>
+          </TransactionContextProvider>
+        </WatchlistProvider>
       </PortfolioContextProvider>
       
       </>

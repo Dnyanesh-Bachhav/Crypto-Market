@@ -4,7 +4,20 @@ import { COLORS } from "../constants";
 import Button1 from "./Button1";
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-function SheetComponent({coinName,symbol,current_price,uri,price_change_percentage_24h}){
+import { FontAwesome } from '@expo/vector-icons';
+import { useWatchlist } from "../../Contexts/WatchListContext";
+function SheetComponent({coinName, coinId, symbol,current_price,uri,price_change_percentage_24h}){
+    const { watchlistCoinIds, removeWatchlistCoinId, storeWatchlistCoinId } = useWatchlist();
+    const checkIfCoinIsWatchListed = ()=>{
+        return watchlistCoinIds.some((coinIdValue)=> coinIdValue===coinId);
+    }
+    const handleWatchListCoin = ()=>{
+        if(checkIfCoinIsWatchListed(coinId))
+        {
+            return removeWatchlistCoinId(coinId);
+        }
+        return storeWatchlistCoinId(coinId);
+    }
     let textColor = price_change_percentage_24h > 0 ? COLORS.success : COLORS.red;
     return(
         <View style={styles.container}>
@@ -22,8 +35,11 @@ function SheetComponent({coinName,symbol,current_price,uri,price_change_percenta
                 <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center', alignItems: 'flex-end',}} >
                         <TouchableOpacity>
                     <View style={{justifyContent: 'center',alignItems: 'center'}} >
-                        <Ionicons name="eye-outline" size={24} color="black" />
-                        <Text style={{fontSize: 10}} >Watchlist</Text>
+                        {/* <Ionicons name="eye-outline" size={24} color="black" /> */}
+                        <FontAwesome name={ checkIfCoinIsWatchListed() ? "star" : "star-o" }  size={24} color={ checkIfCoinIsWatchListed() ? "#FFBF00" : "black" }  onPress={()=>{
+                            handleWatchListCoin();
+                        }} />
+                        {/* <Text style={{fontSize: 10}} >Watchlist</Text> */}
                     </View>
                         </TouchableOpacity>
                 </View>

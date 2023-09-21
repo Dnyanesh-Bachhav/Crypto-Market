@@ -1,39 +1,57 @@
-import { StyleSheet, Text, View } from "react-native";
-import LottieView from 'lottie-react-native';
-import { Image } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { useWatchlist } from '../Contexts/WatchListContext';
+import CoinItem from '../components/marketScreen/CoinItem';
+import { getWatchlistedCoins } from '../Services/requests';
 
-function WatchListScreen(){
-    return(
-        <View style={styles.container}>
-            {/* <Text>Hi there it is watchlist screen</Text> */}
-            <Text style={{ fontSize: 20}}><Text style={{fontWeight: 'bold', fontSize: 24}}>Boss:</Text> Data kidhar hein?</Text>
-            
-            <Text style={{ fontSize: 20, justifyContent:'center',alignItems:'center'}}><Text style={{fontWeight: 'bold', fontSize: 24}}>Me:</Text> Cloud se aa raha he sir... abhi</Text>
-            <Text style={{ fontSize: 20, justifyContent:'center',alignItems:'center'}}>aayega😥</Text>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 5 }}>Le cloud:</Text>
-            {/* <LottieView
-                autoPlay
-                style={{
-                  width: "100%",
-                  height: "72%",
-                  alignSelf: 'center',
-                }}
-                
-                source={require("../assets/122344-funny-cloud.json")}
-                speed={0.7}
-              /> */}
-              <Image source={require("../assets/122344-funny-cloud.gif")} style={{
-                width: '100%',
-                height: '60%'
-              }} />
-        </View>
-    );
-}
-const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+const WatchlistScreen = () => {
+  const {watchlistCoinIds} = useWatchlist();
+
+  console.log(watchlistCoinIds);
+  const [coins, setCoins] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const transformCoinIds = () => watchlistCoinIds.join('%2C');
+
+  const fetchWatchlistedCoins = async () => {
+    if (loading) {
+      return;
     }
-})
-export default WatchListScreen;
+    setLoading(true);
+    const watchlistedCoinsData = await getWatchlistedCoins(1, transformCoinIds());
+    setCoins(watchlistedCoinsData);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (watchlistCoinIds.length > 0) {
+      fetchWatchlistedCoins();
+    }
+  }, [watchlistCoinIds]);
+
+  return (
+    <View style={ styles.container }>
+      <FlatList 
+        data={coins}
+        renderItem={({ item }) => 
+        <CoinItem coinName={item.name} coinId={item.id} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h} />}
+        refreshControl={
+          <RefreshControl 
+            refreshing={loading}
+            tintColor="white"
+            onRefresh={watchlistCoinIds.length > 0 ? fetchWatchlistedCoins : null}
+            />
+          }
+          />
+    </View>
+  )
+};
+
+const styles = StyleSheet.create({
+  container:{
+      flex: 1,
+      marginTop: 10,
+      paddingHorizontal: 10
+  },
+});
+export default WatchlistScreen;

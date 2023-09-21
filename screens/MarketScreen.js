@@ -74,7 +74,7 @@ function MarketScreen(){
                                 refRBSheet.current.open();
                                 
                             }} >
-                                <CoinItem coinName={item.name} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h} />
+                                <CoinItem coinName={item.name} coinId={item.id} symbol={item.symbol} current_price={item.current_price} uri={item.image} price_change_percentage_24h={item.price_change_percentage_24h} />
                         </TouchableOpacity>
                     )}
                     
@@ -125,7 +125,7 @@ function MarketScreen(){
                 }                
                 }}
             >
-                <SheetComponent coinName={currentCoin.name} symbol={currentCoin.symbol} current_price={currentCoin.current_price||1000} uri={currentCoin.image||"https://assets.coingecko.com/coins/images/1/small/bitcoin.png"} price_change_percentage_24h={currentCoin.price_change_percentage_24h||"1.2"} />
+                <SheetComponent coinName={currentCoin.name} coinId={ currentCoin.id } symbol={currentCoin.symbol} current_price={currentCoin.current_price||1000} uri={currentCoin.image||"https://assets.coingecko.com/coins/images/1/small/bitcoin.png"} price_change_percentage_24h={currentCoin.price_change_percentage_24h||"1.2"} />
       </RBSheet>
             </View>)
             : <NoInternetScreen/>

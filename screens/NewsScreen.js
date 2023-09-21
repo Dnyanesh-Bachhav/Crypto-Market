@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, FlatList, Dimensions, TouchableOpacity, Linking, Alert, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, FlatList, Dimensions, TouchableOpacity, Linking, Alert, TextInput, ActivityIndicator } from 'react-native';
 import { COLORS } from '../components/constants';
 import { getAllNews } from '../Services/requestsNewsApi';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,9 +9,11 @@ const CARD_HEIGHT = Dimensions.get('window').height / 5;
 const CARD_WIDTH = Dimensions.get('window').width / 3;
 function NewsScreen() {
     const [news, setNews] = useState([]);
+    const [refreshing, setRefreshing ] = useState(false);
     const navigation = useNavigation();
     const [searchTerm, setSearchTerm] = useState("bitcoin");
     async function getNews(str) {
+        setRefreshing(true);
         if (str == null)
             str = "bitcoin";
         const data = await getAllNews(str);
@@ -23,6 +25,7 @@ function NewsScreen() {
         })
         arr1 = arr1.slice(0, 10);
         setNews(arr1);
+        setRefreshing(false);
     }
     async function handleClick(url) {
         let canOpen = Linking.canOpenURL(url);
@@ -41,7 +44,7 @@ function NewsScreen() {
             {/* <Header/> */}
         <View style={styles.container}>
             {/* <Text>NEWS SCREEN</Text> */}
-
+            
             <TextInput
                 placeholder="Search news"
                 onSubmitEditing={(event) => {
@@ -54,7 +57,10 @@ function NewsScreen() {
 
                 style={styles.inputStyle}
             />
-            <FlatList
+            {
+                refreshing && <ActivityIndicator size={"small"} color={"black"} />
+            }
+            { news && <FlatList
                 data={news}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }) => (
@@ -106,7 +112,7 @@ function NewsScreen() {
                 )
                 }
                 keyExtractor={(item, index) => index}
-            />
+            /> }
 
         </View>
         </>
