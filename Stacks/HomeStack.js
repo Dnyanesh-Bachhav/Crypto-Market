@@ -1,7 +1,6 @@
 import react from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
-import coinChartScreen from '../screens/CoinChartScreen';
 import BasketItem from '../screens/BasketItemsScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from '../components/CustomDrawer';
@@ -20,6 +19,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import GreedAndFearIndexScreen from '../screens/GreedAndFearIndexScreen';
 import TransactionHistoryScreen from '../screens/TransactionHistoryScreen';
 import { FontAwesome5 } from '@expo/vector-icons';
+import CoinDetailedScreen from '../screens/CoinChartScreen';
 const HomeScreenStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 function DrawerStack(){
@@ -93,7 +93,7 @@ function HomeStack(){
                 headerShown: false,
             }}
             />
-            <HomeScreenStack.Screen name="coinDetails" component={coinChartScreen}
+            <HomeScreenStack.Screen name="coinDetails" component={CoinDetailedScreen}
             options={{
                 headerShown: false,
             }}

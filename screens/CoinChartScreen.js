@@ -1,11 +1,11 @@
 import react,{ useState,useEffect } from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,Dimensions,ScrollView } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Header from '../components/CoinChartScreen/Header';
+import Header from '../components/CoinDetailedScreen/Header';
 import { AntDesign } from '@expo/vector-icons';
 import { getCoinHistory,getCoinDataById } from '../Services/requests';
 import { COLORS } from '../components/constants';
-import CoinData from '../components/CoinChartScreen/coinData';
+import CoinData from '../components/CoinDetailedScreen/coinData';
 import {
   LineChart,
   BarChart,
@@ -16,7 +16,7 @@ import {
 } from "react-native-chart-kit";
 const {width: SIZE} = Dimensions.get('window');
 
-function CoinChartScreen({route}){
+function CoinDetailedScreen ({route}){
    async function fetchdata(){
         getCoinDataById(route.params.coinId).then(data=>{
             // console.log("CoinName: "+route.params.coinId);
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
 
     }
 });
-export default CoinChartScreen;
+export default CoinDetailedScreen;
