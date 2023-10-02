@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import CustomDrawer from '../../components/CustomDrawer';
+import CustomDrawer from './CustomDrawer';
 import HomeScreen from '../../screens/HomeScreen';
 import HomeStack from '../../Stacks/HomeStack';
 import { COLORS } from '../../components/constants';

@@ -1,33 +1,48 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
 import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { COLORS } from "./constants";
+import { COLORS } from "../../components/constants";
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import user from "../assets/user.png";
+import user from "../../assets/user.png";
 import * as Sharing from "expo-sharing";
 import { Asset, useAssets } from "expo-asset";
+import * as FileSystem from 'expo-file-system';
 const Drawer = createDrawerNavigator();
-async function handleShare(){
-       const isAvailable = await Sharing.isAvailableAsync();
 
-    if(isAvailable)
-    {
-        const [asset,error] = useAssets(require("../assets/logo.png"));
-        console.log(asset);
-        console.log("Sharing is available...");
-        await Sharing.shareAsync({
-            dialogTitle: "Download the app Now...!!!"
-        })
-        // await Sharing.shareAsync("../assets/banner1.png");
-    }
-    else{
-        Alert.alert("Sharing is not available...");
-    }
-
-}
 function CustomDrawer(props) {
-   
+
+    const handleShare = async ()=> {
+        const isAvailable = await Sharing.isAvailableAsync();
+ 
+     if(isAvailable)
+     {
+        //  console.log("Sharing available...");
+        //  const [asset,error] = useAssets(require("../../assets/logo.png"));
+        //  console.log(asset);
+        //  console.log("Sharing is available...");
+        //  await Sharing.shareAsync({
+        //      dialogTitle: "Download the app Now...!!!"
+        //  })
+    const asset = Asset.fromModule(require("../../assets/Promotion.png"));
+    await asset.downloadAsync();
+    const tmpFile = FileSystem.cacheDirectory + 'Promotion.png';
+
+    try {
+      // sharing only works with `file://` urls on Android so we need to copy it out of assets
+      await FileSystem.copyAsync({ from: asset.localUri, to: tmpFile });
+      await Sharing.shareAsync(tmpFile, {
+        dialogTitle: 'Is it a snake or a hat?',
+      });
+    } catch (e) {
+      console.error(e);
+    }
+         // await Sharing.shareAsync("../assets/banner1.png");
+     }
+     else{
+         Alert.alert("Sharing is not available...");
+     }
+ }
     return (
         <View style={styles.container}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: COLORS.secondary }}>
