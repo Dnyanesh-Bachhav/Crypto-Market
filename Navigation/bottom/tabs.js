@@ -1,16 +1,16 @@
 import React from "react";
 import {View,Text,StyleSheet,Image,TouchableOpacity} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "../screens/HomeScreen";
-import MarketScreen from "../screens/MarketScreen";
-import PortfolioScreen from "../screens/Portfolio";
-import BasketsScreen from "../screens/BasketsScreen";
-import { COLORS } from "../components/constants";
-import HomeStack from "../Stacks/HomeStack";
-import BasketsStack from "../Stacks/BasketStack";
-import MarketStack from "../Stacks/MarketStack";
-import NewsScreen from "../screens/NewsScreen";
-import NewsStack from "../Stacks/NewsStack";
+import HomeScreen from "../../screens/HomeScreen";
+import MarketScreen from "../../screens/MarketScreen";
+import PortfolioScreen from "../../screens/Portfolio";
+import BasketsScreen from "../../screens/BasketsScreen";
+import { COLORS } from "../../components/constants";
+import HomeStack from "../../Stacks/HomeStack";
+import BasketsStack from "../../Stacks/BasketStack";
+import MarketStack from "../../Stacks/MarketStack";
+import NewsScreen from "../../screens/NewsScreen";
+import NewsStack from "../../Stacks/NewsStack";
 
 
 
@@ -35,7 +35,7 @@ function Tabs(){
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
                     {/* <TouchableOpacity> */}
-                        <Image source={require("../assets/Home.png")} style={{
+                        <Image source={require("../../assets/Home.png")} style={{
                             tintColor: focused ? COLORS.primary : COLORS.black,
                             ...styles.imgStyle}}/>
                         <Text style={{color: focused ? COLORS.primary : COLORS.black,}} >Home</Text>
@@ -48,7 +48,7 @@ function Tabs(){
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
                     {/* <TouchableOpacity> */}
-                        <Image source={require("../assets/Market.png")} style={{
+                        <Image source={require("../../assets/Market.png")} style={{
                             tintColor: focused ? COLORS.primary : COLORS.black,
                             ...styles.imgStyle}}/>
                         <Text style={{color: focused ? COLORS.primary : COLORS.black,}} >Market</Text>
@@ -62,7 +62,7 @@ function Tabs(){
                     tabBarIcon: ({focused})=>(
                         <View style={styles.tabOption}>
                         {/* <TouchableOpacity> */}
-                            <Image source={require("../assets/newspaper.png")} style={{
+                            <Image source={require("../../assets/newspaper.png")} style={{
                                 tintColor: focused ? COLORS.primary : COLORS.black,
                                 ...styles.imgStyle}}/>
                             <Text style={{color: focused ? COLORS.primary : COLORS.black,}} >News</Text>
@@ -75,7 +75,7 @@ function Tabs(){
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
                     {/* <TouchableOpacity> */}
-                        <Image source={require("../assets/Basket.png")} style={{
+                        <Image source={require("../../assets/Basket.png")} style={{
                             tintColor: focused ? COLORS.primary : COLORS.black,
                             ...styles.imgStyle}}/>
                         <Text style={{color: focused ? COLORS.primary : COLORS.black,}} >Baskets</Text>
@@ -89,7 +89,7 @@ function Tabs(){
                 tabBarIcon: ({focused})=>(
                     <View style={styles.tabOption}>
                     {/* <TouchableOpacity> */}
-                        <Image source={require("../assets/Portfolio.png")} style={{
+                        <Image source={require("../../assets/Portfolio.png")} style={{
                             tintColor: focused ? COLORS.primary : COLORS.black,
                             ...styles.imgStyle}}/>
                         <Text style={{color: focused ? COLORS.primary : COLORS.black,}} >Portfolio</Text>

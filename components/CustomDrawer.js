@@ -1,4 +1,4 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
 import { Alert, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "./constants";
 import { Entypo } from '@expo/vector-icons';
@@ -7,6 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import user from "../assets/user.png";
 import * as Sharing from "expo-sharing";
 import { Asset, useAssets } from "expo-asset";
+const Drawer = createDrawerNavigator();
 async function handleShare(){
        const isAvailable = await Sharing.isAvailableAsync();
 
@@ -40,6 +41,7 @@ function CustomDrawer(props) {
                     <FontAwesome5 name="coins" size={24} color={COLORS.primary} style={{marginLeft: 5}} />
                     </View>
                 </View>
+
                 <View style={styles.listContainer}>
                     <DrawerItemList {...props} />
                 </View>

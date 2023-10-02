@@ -3,7 +3,7 @@ import react,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
 import { COLORS } from './components/constants';
 import { NavigationContainer } from '@react-navigation/native';
-import Tabs from './Navigation/tabs';
+import Tabs from './Navigation/bottom/tabs';
 import NetInfo from '@react-native-community/netinfo';
 import NoInternetScreen from './screens/NoInternetScreen';
 import PortfolioContextProvider from './Contexts/PortfolioContext';
@@ -12,6 +12,8 @@ import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-get-random-values';
 import WatchlistProvider from './Contexts/WatchListContext';
+import DrawerNavigator from './Navigation/drawer/DrawerNavigator';
+import AppNavigator from './Navigation/AppNavigator';
 
 export default function App() {
   const [connected,setConnected] = useState(true);
@@ -33,7 +35,9 @@ export default function App() {
         <WatchlistProvider>
           <TransactionContextProvider>
           <NavigationContainer>
-              <Tabs/>
+              {/* <Tabs/> */}
+              {/* <DrawerNavigator/> */}
+              <AppNavigator/>
           </NavigationContainer>
           </TransactionContextProvider>
         </WatchlistProvider>
